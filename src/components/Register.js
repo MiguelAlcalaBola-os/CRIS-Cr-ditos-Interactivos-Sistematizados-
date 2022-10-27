@@ -33,22 +33,22 @@ export function Register() {
       {error && <Alert message={error} />}
       <form onSubmit={handleSubmit} className="col-5 p-5  mb-5 rounded-1 bg-light">
         <fieldset disabled="">
-          <div class="form-group">
-            <label for="email">Email</label>
+          <div className="form-group">
+            <label>Email</label>
             <input type="email"
               name="email"
               id="email"
               onChange={(e) => setUser({ ...userRegister, email: e.target.value })}
-              class="form-control"
+              className="form-control"
               placeholder="tucorreo@company.com" />
           </div> <br />
           <div class="form-group">
-            <label for="password">Password</label>
+            <label>Password</label>
             <input type="password"
               name="password"
               id="password"
               onChange={(e) => setUser({ ...userRegister, password: e.target.value })}
-              class="form-control"
+              className="form-control"
               placeholder="Ingrese su contraseña" />
           </div> <br />
           <div className="d-flex justify-content-center">

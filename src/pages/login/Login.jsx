@@ -63,7 +63,6 @@ export function Login() {
       >
         <div className="mb-5">
           <label
-            htmlFor="email"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
             Email
@@ -79,7 +78,6 @@ export function Login() {
         </div>
         <div className="mb-5">
           <label
-            htmlFor="password"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
             Password
@@ -123,10 +121,6 @@ export function Login() {
         </Link>
       </p>
     </div>
-
-    
-
-    
   );
 }
 export default Login;

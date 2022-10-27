@@ -59,27 +59,27 @@ export function Login() {
 
       <form onSubmit={handleSubmit} className="col-5 p-5  mb-5 rounded-1 bg-light">
         <fieldset disabled="">
-          <div class="form-group">
-            <label for="email">Email</label>
+          <div className="form-group">
+            <label>Email</label>
             <input type="email"
               name="email"
               id="email"
               onChange={handleChange}
-              class="form-control"
+              className="form-control"
               placeholder="tucorreo@company.com" />
           </div> <br />
-          <div class="form-group">
-            <label for="password">Password</label>
+          <div className="form-group">
+            <label>Password</label>
             <input type="password"
               name="password"
               id="password"
               onChange={handleChange}
-              class="form-control"
+              className="form-control"
               placeholder="Ingrese su contraseña" />
           </div> <br />
           <div className="d-flex justify-content-between">
-            <button type="submit" class="btn btn-primary w-50 mr-5">Sign In</button>
-            <button onClick={handleGoogleSignin} class="btn btn-success w-50 ml-2">Google login</button>
+            <button type="submit" className="btn btn-primary w-50 mr-5">Sign In</button>
+            <button onClick={handleGoogleSignin} className="btn btn-success w-50 ml-2">Google login</button>
           </div>
 
           <div className="d-flex flex-column align-content-center w-100">

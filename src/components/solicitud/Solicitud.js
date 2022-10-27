@@ -59,14 +59,12 @@ export function Cotizar() {
                             className="border-secondary form-control text-center"
                             placeholder="Apellidos"
                           ></input><br />
-                          <div className="">
-                            <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" />
-                            <label class="btn btn-secondary" for="option1">Hombre</label>
-                            <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" />
-                            <label class="btn btn-secondary" for="option2">Mujer</label>
-                            <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" />
-                            <label class="btn btn-secondary" for="option3">Indefinido</label>
-                          </div><br />
+                           <select className="border-secondary rounded-1 p-1 text-center" id="cars" name="cars">
+                            <option value="volvo">Sexo</option>
+                            <option value="saab">Masculino</option>
+                            <option value="fiat">Femenino</option>
+                            <option value="audi">Indefinido</option>
+                          </select><br />
                           <input
                             type="text"
                             name="dato3"
@@ -80,25 +78,26 @@ export function Cotizar() {
                             placeholder="Fecha de nacimiento"
                           ></input><br />
 
-                          <select className="border-secondary rounded-1 p-1" id="cars" name="cars">
+                          <select className="text-center border-secondary rounded-1 p-1" id="cars" name="cars">
                             <option value="volvo">Estado migratorio</option>
-                            <option value="saab">opcion</option>
-                            <option value="fiat">opcion</option>
-                            <option value="audi">opcion</option>
+                            <option value="saab">Panameño</option>
+                            <option value="fiat">Extranjero - Residente Permanente</option>
+                            <option value="audi">Extranjero - Residente Temporal</option>
+                            <option value="audi">Extranjero - No Residente</option>
                           </select><br />
 
-                          <select className=" border-secondary rounded-1 p-1" id="cars" name="cars">
+                          <select className="text-center border-secondary rounded-1 p-1" id="cars" name="cars">
                             <option value="volvo">Estado civil</option>
-                            <option value="saab">opcion</option>
-                            <option value="fiat">opcion</option>
-                            <option value="audi">opcion</option>
+                            <option value="saab">Soltero</option>
+                            <option value="fiat">Casado</option>
+                            <option value="audi">Unión Libre</option>
                           </select><br />
-                          <div className="">
-                            <input type="radio" class="btn-check" name="options2" id="option4" autocomplete="off" />
-                            <label class="btn btn-secondary" for="option4"><small>Ingresos</small> Asalariado</label>
-                            <input type="radio" class="btn-check" name="options2" id="option5" autocomplete="off" />
-                            <label class="ml1 btn btn-secondary" for="option5"><small>Ingresos</small> Independiente</label>
-                          </div><br />
+                          <select className="text-center border-secondary rounded-1 p-1" id="cars" name="cars">
+                            <option value="volvo">Tipo de ingresos</option>
+                            <option value="saab">Asalariado</option>
+                            <option value="fiat">Independiente</option>
+                       
+                          </select><br />
 
                           <input
                             type="text"
@@ -106,17 +105,18 @@ export function Cotizar() {
                             className="border-secondary form-control text-center"
                             placeholder="Tiempo de servicios"
                           ></input><br />
-                          <select className=" rounded-1 p-1" id="cars" name="cars">
+                          <select className="text-center rounded-1 p-1" id="cars" name="cars">
                             <option value="volvo">Tipo de propiedad</option>
-                            <option value="saab">Opcion</option>
-                            <option value="fiat">Opcion</option>
-                            <option value="audi">Opcion</option>
+                            <option value="saab">Nueva Interés Regular (+180,000)</option>
+                            <option value="fiat">Vivienda Nueva Interés Preferencial (hasta 180,000)</option>
+                            <option value="audi">Segundo Uso</option>
                           </select><br />
-                          <select className=" rounded-1 p-1" id="cars" name="cars">
+                          <select className="text-center rounded-1 p-1" id="cars" name="cars">
                             <option value="volvo">Proposito de compra</option>
-                            <option value="saab">Opcion</option>
-                            <option value="fiat">Opcion</option>
-                            <option value="audi">Opcion</option>
+                            <option value="saab">Vivienda Principal</option>
+                            <option value="fiat">Veraneo/Vacacional</option>
+                            <option value="audi">Inversión</option>
+                            <option value="audi">Traslado y Préstamo con Garantía Hipotecaria</option>
                           </select><br />
                           <input
                             type="text"

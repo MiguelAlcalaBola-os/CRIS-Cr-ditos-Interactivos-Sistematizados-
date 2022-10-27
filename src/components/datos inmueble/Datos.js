@@ -30,12 +30,11 @@ export function Cotizar() {
                             className="border-secondary form-control text-center"
                             placeholder="Nombre de la propiedad"
                           ></input><br />
-                          <div className="">
-                            <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" />
-                            <label class="btn btn-secondary" for="option1">Casa</label>
-                            <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" />
-                            <label class="btn btn-secondary" for="option2">Apartamento</label>
-                          </div><br />
+                                           <select className="text-center rounded-1 p-1" id="cars" name="cars">
+                            <option value="volvo">Tipo de vivienda</option>
+                            <option value="saab">Casa</option>
+                            <option value="fiat">Apartamento</option>
+                           </select><br />
                           <input
                             type="text"
                             name="dato3"

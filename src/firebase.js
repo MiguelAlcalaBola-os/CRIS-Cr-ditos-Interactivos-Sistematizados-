@@ -1,15 +1,9 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {
-      getAuth,
-      createUserWithEmailAndPassword,
-      signInWithEmailAndPassword,
-      signOut,
-      onAuthStateChanged,
-      GoogleAuthProvider,
-      signInWithPopup,
-      sendPasswordResetEmail,
+      getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail,
     } from "firebase/auth";
+import { getDatabase, ref, onValue, set, child, get, remove} from "firebase/database";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,6 +12,7 @@ import {
 const firebaseConfig = {
   apiKey: "AIzaSyBX_eAqZlFq6LjT3S0YbsNFATqDDSoHIpg",
   authDomain: "cris-auth.firebaseapp.com",
+  databaseURL: "https://cris-auth-default-rtdb.firebaseio.com",
   projectId: "cris-auth",
   storageBucket: "cris-auth.appspot.com",
   messagingSenderId: "272270120696",
@@ -80,15 +75,31 @@ const resetPassword = async (email) => sendPasswordResetEmail(auth, email);
 
 
 function logout (navigate, setUser) {
-  auth.signOut().then(function () {
+  signOut().then(function () {
     setUser(null)
     navigate("/Login")
-      
         // Sign-out successful.
   }).catch(function (error) {
         // An error happened.
   });
 }
 
+//firebase Realtime Database
 
-export {onAuth, login, signup, logout, loginWithGoogle, resetPassword }
+const db = getDatabase(app);
+
+function writeUserData (object) {
+  console.log("hello")
+  set(ref(db, '/cotizaciones/' + object.nombreDeLaPropiedad.replace(" ","")), object )
+  .then(()=> console.log("saved"))
+  .catch(()=> console.log('repeat'))
+}
+
+function removeData () {
+  remove(ref(db, '/cotizaciones/'))
+  .then(()=>console.log('save'))
+  .catch(()=>console.log('repeat'));
+
+}
+
+export {onAuth, login, signup, logout, loginWithGoogle, resetPassword, writeUserData, removeData }
