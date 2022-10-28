@@ -14,7 +14,7 @@ import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { useAuth } from './context/AuthContext.js'
-
+import Login2 from "./pages/login/Login";
 
 
 function App() {
@@ -25,6 +25,8 @@ function App() {
     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
+        <Route path="Login2" element={<Login2 />} />
+          
           <Route path="Login" element={<Login />} />
           <Route path="Register" element={<Register />} />
           <Route element={<PrivateRoute isAllowed={user} redirectTo = "/Login"/>}>
