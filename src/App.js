@@ -10,6 +10,7 @@ import Solicitud from "./components/solicitud/Solicitud"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
+import UserData from "./components/UserData"
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { PrivateRoute } from "./components/PrivateRoute";
@@ -26,7 +27,7 @@ function App() {
       <BrowserRouter>
         <Routes>
         <Route path="Login2" element={<Login2 />} />
-          
+        <Route path="UserData" element={<PrivateRoute isAllowed={user}><UserData /></PrivateRoute>}/>
           <Route path="Login" element={<Login />} />
           <Route path="Register" element={<Register />} />
           <Route element={<PrivateRoute isAllowed={user} redirectTo = "/Login"/>}>

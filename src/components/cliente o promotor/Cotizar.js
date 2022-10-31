@@ -3,20 +3,22 @@ import React, { useState } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import { writeUserData, removeData } from "../../firebase";
-import "../../../src/pages/home/home.scss";
+import { useAuth } from '../../context/AuthContext.js'
+
+
 export function Cotizar() {
   const [montoDePrestamo, setMontoDePrestamo] = useState(null)
-  const [plazoEnMeses, setPlazoEnMeses] = useState(null)  
-  const [tasaDeinteresAnual, setTasaDeinteresAnual] = useState(null)
-  const [interesMensual, setInteresMensual] = useState(0)
-  const [cotaMensual, setCotaMensual] = useState(0)
-
+  const [plazoEnMeses, setPlazoEnMeses] = useState(null)
+  const [tasaDeinteresAnual, setTasaDeinteresAnual] = useState("")
+  const [interesMensual, setInteresMensual] = useState("")
+  const [cotaMensual, setCotaMensual] = useState("")
+const {setSaveCotizacion}= useAuth()
 
   const Guardar = (e) => {
     e.preventDefault()
     if (
       e.target.form[0].value.length < 3 || e.target.form[1].value.length < 3 ||
-      e.target.form[2].value.length < 3 || e.target.form[3].value.length < 3 ) {
+      e.target.form[2].value.length < 3 || e.target.form[3].value.length < 3) {
       console.log('error')
       return
     }
@@ -33,6 +35,8 @@ export function Cotizar() {
       estadoMigratorio: e.target.form[9].value,
     }
     writeUserData(object)
+    setSaveCotizacion(true)
+
   }
 
   const calculoDeCotaMensual = (e) => {
@@ -40,8 +44,8 @@ export function Cotizar() {
     const p = e.target.form[4].value // montoDePrestamo
     const n = e.target.form[6].value    // plazoEnMeses
     const tasaDeinteresAnual00 = e.target.form[5].value  //
-    const i = (tasaDeinteresAnual00/100) / (360 * 12 / 365)
-    const cotaMes = p / ((1 - Math.pow((1 + (i/100)), -n)) / i)
+    const i = (tasaDeinteresAnual00 / 100) / (360 * 12 / 365)
+    const cotaMes = p / ((1 - Math.pow((1 + (i / 100)), -n)) / i)
 
     setMontoDePrestamo(e.target.form[4].value)
     setPlazoEnMeses(e.target.form[6].value)
@@ -50,12 +54,27 @@ export function Cotizar() {
     setInteresMensual(i)
     setCotaMensual(cotaMes)
 
+    setSaveCotizacion(false)
+  }
+   
+  const handlerOnChange = (e) => {
+    
+    if(e.target.name == "tasa") {
+       setTasaDeinteresAnual(e.target.value + "%**")
+    }
+    
+    
   }
 
+  console.log(tasaDeinteresAnual)
+
+
+
   const remove = (e) => {
-    e.preventDefault() 
+    e.preventDefault()
     removeData()
   }
+
 
   return (
     <div className="home">
@@ -109,14 +128,14 @@ export function Cotizar() {
                             type="text"
                             name="dato3"
                             className="border-secondary form-control mb-3 text-center"
-                            placeholder="Monto de prestamo"
+                            placeholder="Monto de prestamo $"
                           ></input>
                           <input
                             type="text"
-                            name="dato3"
-                            className="border-secondary form-control mb-3 text-center"
-                            placeholder="Tasa de interes anual"
-                          ></input>
+                            name="tasa"
+                            className="percentage border-secondary form-control mb-3 text-center"
+                            placeholder="Tasa de interes anual %"
+                          ></input> 
                           <input
                             type="text"
                             name="dato3"
@@ -138,7 +157,7 @@ export function Cotizar() {
                             <option value="Veraneo/Vacacional">Veraneo/Vacacional</option>
                             <option value="Inversión">Inversión</option>
                             <option value="Traslado y Préstamo con Garantía Hipotecaria">Traslado y Préstamo con Garantía Hipotecaria</option>
-                          
+
                           </select><br />
                           <label for="cars">Estado Migratorio</label><br />
                           <select className=" rounded-1 p-1" id="cars" name="cars">
@@ -147,33 +166,33 @@ export function Cotizar() {
                             <option value="Extranjero - Residente Permanente">Extranjero - Residente Permanente</option>
                             <option value="Extranjero - Residente Temporal">Extranjero - Residente Temporal</option>
                             <option value="Extranjero - No Residente">Extranjero - No Residente</option>
-                        
+
                           </select>
                         </div>
                         <button className="btn-Cotizador col-6 btn btn-primary rounded-5 mb-5" onClick={calculoDeCotaMensual}>Cotizar</button>
-                {montoDePrestamo && plazoEnMeses && tasaDeinteresAnual &&        
-                <div className={"container card card-body shadow"}>
-                  <div className="row"> 
-                  <div className="col-4 text-center">
-                      <span>Total a financiar: </span> <br /><span>{montoDePrestamo}</span>
-                    </div>
-                    <div className="col-4 text-center">
-                      <span>Meses de financiamiento: </span> <br /><span>{plazoEnMeses}</span>
-                    </div>
-                    <div className="col-4 text-center">
-                      <span>Abono Inicial: </span> <br /><span>{Math.round(cotaMensual * 100) / 100} </span>
-                    </div>
-                    <div className="col-4 text-center">
-                      <span>Tasa de interes mensual: </span> <br /><span>{Math.round(interesMensual * 100) / 100} </span>
-                    </div>
-                    <div className="col-4 text-center">
-                      <span>Pago mensual: </span> <br /><span>{Math.round(cotaMensual * 100) / 100} </span>
-                    </div>
-                  </div>
-                  </div>}
-                  <br />
-                        <button className="btn-Cotizador col-6 btn btn-primary rounded-5 mb-5" onClick={Guardar}>Guardar Cotizacion</button> 
-                                         <br />
+                        {montoDePrestamo && plazoEnMeses && tasaDeinteresAnual &&
+                          <div className={"container card card-body shadow"}>
+                            <div className="row">
+                              <div className="col-4 text-center">
+                                <span>Total a financiar: </span> <br /><span>{montoDePrestamo}</span>
+                              </div>
+                              <div className="col-4 text-center">
+                                <span>Meses de financiamiento: </span> <br /><span>{plazoEnMeses}</span>
+                              </div>
+                              <div className="col-4 text-center">
+                                <span>Abono Inicial: </span> <br /><span>{Math.round(cotaMensual * 100) / 100} </span>
+                              </div>
+                              <div className="col-4 text-center">
+                                <span>Tasa de interes mensual: </span> <br /><span>{Math.round(interesMensual * 100) / 100} </span>
+                              </div>
+                              <div className="col-4 text-center">
+                                <span>Pago mensual: </span> <br /><span>{Math.round(cotaMensual * 100) / 100} </span>
+                              </div>
+                            </div>
+                          </div>}
+                        <br />
+                        <button className="btn-Cotizador col-6 btn btn-primary rounded-5 mb-5" onClick={Guardar}>Guardar Cotizacion</button>
+                        <br />
                         <button className="btn-Cotizador col-6 btn btn-primary rounded-5 mb-5" onClick={remove}>Eliminar Cotizacion</button>
 
                       </div>

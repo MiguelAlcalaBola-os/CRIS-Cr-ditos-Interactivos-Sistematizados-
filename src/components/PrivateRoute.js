@@ -7,7 +7,7 @@ export const PrivateRoute = ({
   children,
 }) => {
   if (!isAllowed) {
-    return <Navigate to={redirectTo} replace />;
+    return <Navigate to={"/Login"} />;
   }
   return children ? children : <Outlet />;
 };

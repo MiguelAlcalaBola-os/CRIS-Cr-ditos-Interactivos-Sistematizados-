@@ -31,10 +31,11 @@ const auth = getAuth()
 const providerGoogle = new GoogleAuthProvider();
 
 
-function onAuth(setUser,navigate) {
+function onAuth(setUser,setUserData) {
   return onAuthStateChanged(auth, (user) => {
         if (user) {
               setUser(user)
+              getData(setUserData)
         }
   });
 }
@@ -74,10 +75,10 @@ function loginWithGoogle (navigate) {
 const resetPassword = async (email) => sendPasswordResetEmail(auth, email);
 
 
-function logout (navigate, setUser) {
-  signOut().then(function () {
+function logout ( setUser) {
+  signOut(auth).then(function () {
+    console.log("hello")
     setUser(null)
-    navigate("/Login")
         // Sign-out successful.
   }).catch(function (error) {
         // An error happened.
@@ -102,4 +103,23 @@ function removeData () {
 
 }
 
-export {onAuth, login, signup, logout, loginWithGoogle, resetPassword, writeUserData, removeData }
+
+function getData(setUserData) {
+ 
+  onValue(ref(db, '/'), (snapshot) => {
+    if (snapshot.exists()) {
+          setUserData(snapshot.val());
+        } else {
+          setUserData('');
+        }
+    
+  });
+}
+
+async function removeDataItem (data, setUserData) {
+  await remove(ref(db, '/cotizaciones/' + data))
+  getData(setUserData)
+}
+
+
+export {onAuth, login, signup, logout, loginWithGoogle, resetPassword, writeUserData, removeData, removeDataItem  }
