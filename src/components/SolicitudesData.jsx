@@ -6,36 +6,36 @@ import { useAuth } from '../context/AuthContext.js'
 import { removeDataItem } from "../firebase";
 
 
-export function UserData() {
+export function SolicitudesData() {
     const { userDB, setUserData } = useAuth()
 
     const remove = (item) => {
-        removeDataItem("cotizaciones", item, setUserData)
+        removeDataItem("/solicitudes/", item, setUserData)
     }
     return (
         <table className="table h-100">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nombre de la propiedad</th>
-                    <th>Plazo en meses</th>
-                    <th>Abono inicial</th>
-                    <th>Tasa de interes mensual</th>
-                    <th>Meses de financiamiento</th>
+                    <th>Nombre del solicitante</th>
+                    <th>Apellidos</th>
+                    <th>Cedula</th>
+                    <th>Tasa de interes anual</th>
+                    <th>Precio de venta</th>
                     <th>Borrar</th>
                 </tr>
             </thead>
             
-            {userDB && Object.keys(userDB.cotizaciones).map((item, index) => {
-                console.log(userDB.cotizaciones[item])
+            {userDB && Object.keys(userDB.solicitudes).map((item, index) => {
+                console.log(userDB.solicitudes[item])
                 return <tbody>
                     <tr>
                         <th scope="row">{index}</th>
-                        <td>{item}</td>
-                        <td>{userDB.cotizaciones[item].plazoEnMeses}</td>
-                        <td>{userDB.cotizaciones[item].abonoInicial}</td>
-                        <td>{userDB.cotizaciones[item].tasaDeinteresMensual}</td>
-                        <td>{userDB.cotizaciones[item].plazoEnMeses}</td>
+                        <td>{userDB.solicitudes[item].Nombres}</td>
+                        <td>{userDB.solicitudes[item].Apellidos}</td>
+                        <td>{userDB.solicitudes[item].Cedula}</td>
+                        <td>{userDB.solicitudes[item]["Tasa de interes anual"]}</td>
+                        <td>{userDB.solicitudes[item]["Precio de ventas"]}$</td>
                         <td><button type="button" class="btn btn-danger"  onClick={()=>remove(item)}>Eliminar</button></td>
                     </tr>
                 </tbody>
@@ -44,4 +44,5 @@ export function UserData() {
         </table>
     );
 }
-export default UserData;
+export default SolicitudesData;
+

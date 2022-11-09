@@ -1,18 +1,21 @@
 import "./style/Cotizar.css";
 import React, { useState } from "react";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
+import Sidebar from "../sidebar/Sidebar";
+import Navbar from "../navbar/Navbar";
 import { writeUserData, removeData } from "../../firebase";
 import { useAuth } from '../../context/AuthContext.js'
-
+import CotizarImg from "../../assets/cotizarimg.png";
 
 export function Cotizar() {
+  const [allData, setAllData] = useState({})
   const [montoDePrestamo, setMontoDePrestamo] = useState(null)
   const [plazoEnMeses, setPlazoEnMeses] = useState(null)
   const [tasaDeinteresAnual, setTasaDeinteresAnual] = useState("")
   const [interesMensual, setInteresMensual] = useState("")
   const [cotaMensual, setCotaMensual] = useState("")
-const {setSaveCotizacion}= useAuth()
+  const { setSaveCotizacion } = useAuth()
+
+  const [getPorcentage, setGetPorcentage] = useState({ abonoInicial: 0, precioDeVenta: 0.00000001 })
 
   const Guardar = (e) => {
     e.preventDefault()
@@ -33,8 +36,10 @@ const {setSaveCotizacion}= useAuth()
       tipoDePropiedad: e.target.form[7].value,
       propositoDeCompra: e.target.form[8].value,
       estadoMigratorio: e.target.form[9].value,
+      tasaDeinteresMensual: interesMensual,
     }
-    writeUserData(object)
+    setAllData(object)
+    writeUserData("/cotizaciones/", object.nombreDeLaPropiedad.replace(" ", ""), object)
     setSaveCotizacion(true)
 
   }
@@ -45,8 +50,8 @@ const {setSaveCotizacion}= useAuth()
     const n = e.target.form[6].value    // plazoEnMeses
     const tasaDeinteresAnual00 = e.target.form[5].value  //
     const i = (tasaDeinteresAnual00 / 100) / (360 * 12 / 365)
-    const cotaMes = p / ((1 - Math.pow((1 + (i / 100)), -n)) / i)
-
+    const cotaMes = p / ((1 - Math.pow((1 + i), -(n))) / i)
+    console.log(cotaMes)
     setMontoDePrestamo(e.target.form[4].value)
     setPlazoEnMeses(e.target.form[6].value)
     setTasaDeinteresAnual(e.target.form[5].value)
@@ -56,17 +61,12 @@ const {setSaveCotizacion}= useAuth()
 
     setSaveCotizacion(false)
   }
-   
-  const handlerOnChange = (e) => {
-    
-    if(e.target.name == "tasa") {
-       setTasaDeinteresAnual(e.target.value + "%**")
-    }
-    
-    
-  }
 
-  console.log(tasaDeinteresAnual)
+
+  const handlerEventeChange = e => {
+    setGetPorcentage({ ...getPorcentage, [e.target.name]: e.target.value })
+  }
+  console.log(getPorcentage)
 
 
 
@@ -78,6 +78,7 @@ const {setSaveCotizacion}= useAuth()
 
   return (
     <div className="home">
+   
       <Sidebar />
       <div className="homeContainer">
         <Navbar />
@@ -100,49 +101,86 @@ const {setSaveCotizacion}= useAuth()
                     <form className="m-2" >
                       <div className="card card-body shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         <div className="my-flex p-5 form-group ">
-                          <input
-                            type="text"
-                            name="dato2"
-                            className="border-secondary form-control mb-3 text-center"
-                            placeholder="Nombre de la propiedad"
-                          ></input>
-                          <input
-                            type="text"
-                            name="dato2"
-                            className="border-secondary form-control mb-3 text-center"
-                            placeholder="Ingreso Mensual"
-                          ></input>
-                          <input
-                            type="text"
-                            name="dato3"
-                            className="border-secondary form-control mb-3 text-center"
-                            placeholder="Precio de Venta"
-                          ></input>
-                          <input
-                            type="text"
-                            name="dato3"
-                            className="border-secondary form-control mb-3 text-center"
-                            placeholder="Abono Inicial"
-                          ></input>
-                          <input
-                            type="text"
-                            name="dato3"
-                            className="border-secondary form-control mb-3 text-center"
-                            placeholder="Monto de prestamo $"
-                          ></input>
-                          <input
-                            type="text"
-                            name="tasa"
-                            className="percentage border-secondary form-control mb-3 text-center"
-                            placeholder="Tasa de interes anual %"
-                          ></input> 
-                          <input
-                            type="text"
-                            name="dato3"
-                            className="border-secondary form-control mb-3 text-center"
-                            placeholder="Plazo en meses"
-                          ></input>
-                          <div></div>
+                          <div className="">
+                            <label htmlFor="">Nombre de la propiedad</label>
+                            <input
+                              type="text"
+                              name="dato2"
+                              className="w-100 border-secondary form-control mb-3 text-center"
+                              placeholder="Nombre de la propiedad"
+                            ></input>
+                          </div>
+
+                          <div className="">
+                            <label htmlFor="">Ingreso Mensual</label>
+                            <input
+                              type="text"
+                              name="dato2"
+                              className=" w-100 border-secondary form-control mb-3 text-center"
+                              placeholder="Ingreso Mensual"
+                            ></input>
+                          </div>
+
+                          <div className="">
+                            <label htmlFor="">Precio de venta</label>
+                            <div class="w-100 d-flex justify-content-center align-items-center mb-3">
+                              <span class="w-25 input-group-text m-0 p-0 d-flex justify-content-center" id="inputGroup-sizing-sm">$</span>
+                              <input type="text"
+                                name="precioDeVenta"
+                                className="w-100 border-secondary form-control  text-center p-0 m-0"
+                                placeholder="Precio de venta $"
+                                onChange={handlerEventeChange} />
+                            </div>
+
+                          </div>
+
+
+                          <div className="">
+                            <label htmlFor="">Abono inicial</label>
+                            <div class="w-100 d-flex justify-content-center align-items-center mb-3">
+                              <span class="w-25 input-group-text m-0 p-0 d-flex justify-content-center" id="inputGroup-sizing-sm">$</span>
+                              <input type="text"
+                                name="abonoInicial"
+                                className="w-100 border-secondary form-control  text-center p-0 m-0"
+                                placeholder="Abono inicial $"
+                                onChange={handlerEventeChange} />
+                              <span class="w-25 input-group-text m-0 p-0 d-flex justify-content-center" id="inputGroup-sizing-sm">{getPorcentage.abonoInicial * 100 / getPorcentage.precioDeVenta}%</span>
+                            </div>
+                          </div>
+
+
+
+                          <div className="">
+                            <label htmlFor="">Monto de prestamo</label>
+                            <div class="w-100 d-flex justify-content-center align-items-center mb-3">
+                              <span class="w-25 input-group-text m-0 p-0 d-flex justify-content-center" id="inputGroup-sizing-sm">$</span>
+                              <input type="text"
+                                name="dato3"
+                                className="w-100 border-secondary form-control  text-center p-0 m-0"
+                                placeholder="Monto de prestamo $" />
+                            </div>
+                          </div>
+
+                          <div className="">
+                            <label htmlFor="">Tasa de interes anual</label>
+                            <div class="w-100 d-flex justify-content-center align-items-center mb-3">
+                              <input type="text"
+                                name="dato3"
+                                className="w-100 border-secondary form-control  text-center p-0 m-0"
+                                placeholder="Tasa de interes anual $" />
+                              <span class="w-25 input-group-text m-0 p-0 d-flex justify-content-center" id="inputGroup-sizing-sm">%</span>
+                            </div>
+                          </div>
+                          <div className="w-100">
+                            <label htmlFor="">Plazo en meses</label>
+                            <input
+                              type="text"
+                              name="dato3"
+                              className=" border-secondary form-control mb-3 text-center"
+                              placeholder="Plazo en meses"
+                            ></input>
+                          </div>
+
                           <label for="cars">Tipo de propiedad</label><br />
                           <select className="border-secondary rounded-1 p-1" id="cars" name="cars">
                             <option value="Seleccione su tipo de propiedad">Seleccione su tipo de propiedad</option>
@@ -172,29 +210,33 @@ const {setSaveCotizacion}= useAuth()
                         <button className="btn-Cotizador col-6 btn btn-primary rounded-5 mb-5" onClick={calculoDeCotaMensual}>Cotizar</button>
                         {montoDePrestamo && plazoEnMeses && tasaDeinteresAnual &&
                           <div className={"container card card-body shadow"}>
+                            <div className="text-center">
+                              <h2>Resultados en base a los datos ingresados (Puedes guardarlos si deseas)</h2>
+                            </div>
                             <div className="row">
-                              <div className="col-4 text-center">
-                                <span>Total a financiar: </span> <br /><span>{montoDePrestamo}</span>
-                              </div>
+                              <img src= {CotizarImg} className="cotizarimg"></img>
+                            </div>
+                            <div className="row">
+                              
                               <div className="col-4 text-center">
                                 <span>Meses de financiamiento: </span> <br /><span>{plazoEnMeses}</span>
                               </div>
+                             
+
                               <div className="col-4 text-center">
-                                <span>Abono Inicial: </span> <br /><span>{Math.round(cotaMensual * 100) / 100} </span>
-                              </div>
-                              <div className="col-4 text-center">
-                                <span>Tasa de interes mensual: </span> <br /><span>{Math.round(interesMensual * 100) / 100} </span>
+                                <span>Tasa de interes mensual: </span> <br /><span>{Math.round(interesMensual * 100000) / 100000} </span>
                               </div>
                               <div className="col-4 text-center">
                                 <span>Pago mensual: </span> <br /><span>{Math.round(cotaMensual * 100) / 100} </span>
                               </div>
                             </div>
-                          </div>}
-                        <br />
-                        <button className="btn-Cotizador col-6 btn btn-primary rounded-5 mb-5" onClick={Guardar}>Guardar Cotizacion</button>
-                        <br />
-                        <button className="btn-Cotizador col-6 btn btn-primary rounded-5 mb-5" onClick={remove}>Eliminar Cotizacion</button>
+                            <br />
+                        <button className="btn-Cotizador col-4 btn btn-primary rounded-5 mb-4" onClick={Guardar}>Guardar Cotizacion</button>
 
+                        <button className="btn-Cotizador col-4 btn btn-primary rounded-5 mb-4" onClick={remove}>Quiero Aplicar</button>
+
+                          </div>}
+                       
                       </div>
                     </form>
                   </div>
@@ -204,9 +246,7 @@ const {setSaveCotizacion}= useAuth()
           </div>
         </div>
         <div className="charts"></div>
-        <div className="listContainer">
-          <div className="listTitle">Latest Transactions</div>
-        </div>
+     
       </div>
     </div>
   );

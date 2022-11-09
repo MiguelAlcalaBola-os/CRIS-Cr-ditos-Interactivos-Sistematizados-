@@ -3,10 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../firebase"
 import { Alert } from "./alert"
 import { useAuth } from '../context/AuthContext.js'
-
+import Success from "./Success"
+import Error from "./Error"
 
 export function Register() {
-  const { user } = useAuth()
+  const { user, success, setUserSuccess  } = useAuth()
 
   const [userRegister, setUser] = useState({
     email: "",
@@ -18,7 +19,7 @@ export function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signup(userRegister.email, userRegister.password, navigate)
+    signup(userRegister.email, userRegister.password, navigate, setUserSuccess)
   };
 
 
@@ -30,8 +31,9 @@ export function Register() {
       <div className="w-full max-w-3xl m-auto">
         <h1 className="text-center font-bold my-4 text-md flex justify-between px-3">Register</h1>
       </div>
-      {error && <Alert message={error} />}
-      <form onSubmit={handleSubmit} className="col-5 p-5  mb-5 rounded-1 bg-light">
+      {success && <Success></Success>}
+  {success == false && <Error>ERROR: verifique e intente nuevamente</Error>}
+        <form onSubmit={handleSubmit} className="col-5 p-5  mb-5 rounded-1 bg-light">
         <fieldset disabled="">
           <div className="form-group">
             <label>Email</label>

@@ -1,50 +1,76 @@
 import Dashboard from "./pages/home/Dashboard";
-import Login from "./components/Login"
-import Register from "./components/Register"
+import Login from "./components/Login";
+import Register from "./components/Register";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
-import Cotizar from "./components/cliente o promotor/Cotizar"
-import Datos from "./components/datos inmueble/Datos"
-import Solicitud from "./components/solicitud/Solicitud"
+import Cotizar from "./components/cliente o promotor/Cotizar";
+import Datos from "./components/datos inmueble/Datos";
+import Solicitud from "./components/solicitud/Solicitud";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
-import UserData from "./components/UserData"
+import UserData from "./components/UserData";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { PrivateRoute } from "./components/PrivateRoute";
-import { useAuth } from './context/AuthContext.js'
+import { useAuth } from "./context/AuthContext.js";
 import Login2 from "./pages/login/Login";
-
+import SolicitudesData from "./components/SolicitudesData";
+import Datatable from "./components/datatable/Datatable";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
-  const { user } = useAuth()
+  const { user } = useAuth();
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
-        <Route path="Login2" element={<Login2 />} />
-        <Route path="UserData" element={<PrivateRoute isAllowed={user}><UserData /></PrivateRoute>}/>
+          <Route path="Login2" element={<Login2 />} />
+          <Route
+            path="UserData"
+            element={
+              <PrivateRoute isAllowed={user}>
+                <UserData />
+              </PrivateRoute>
+            }
+          />
           <Route path="Login" element={<Login />} />
           <Route path="Register" element={<Register />} />
-          <Route element={<PrivateRoute isAllowed={user} redirectTo = "/Login"/>}>
+          <Route
+            element={<PrivateRoute isAllowed={user} redirectTo="/Login" />}
+          >
             <Route index element={<Dashboard />} />
           </Route>
-          <Route element={<PrivateRoute isAllowed={user} redirectTo = "/Solicitud"/>}>
+          <Route
+            element={<PrivateRoute isAllowed={user} redirectTo="/Solicitud" />}
+          >
             <Route path="/Solicitud" element={<Solicitud />} />
           </Route>
-          <Route element={<PrivateRoute isAllowed={user} redirectTo = "/Datos"/>}>
+          <Route
+            element={<PrivateRoute isAllowed={user} redirectTo="/Datos" />}
+          >
             <Route path="/Datos" element={<Datos />} />
           </Route>
-          <Route element={<PrivateRoute isAllowed={user} redirectTo = "/Cotizar"/>}>
+          <Route
+            element={<PrivateRoute isAllowed={user} redirectTo="/Datatable" />}
+          >
+            <Route path="/Datatable" element={<Datatable />} />
+          </Route>
+          <Route
+            element={<PrivateRoute isAllowed={user} redirectTo="/Cotizar" />}
+          >
             <Route path="/Cotizar" element={<Cotizar />} />
           </Route>
-
-
-
+          <Route
+            path="SolicitudesData"
+            element={
+              <PrivateRoute isAllowed={user}>
+                <SolicitudesData />
+              </PrivateRoute>
+            }
+          />
           <Route path="/">
             <Route path="users">
               <Route index element={<List />} />

@@ -10,11 +10,21 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [userDB, setUserDB] = useState(null);
   const [saveCotizacion, setSaveCotizacion] = useState(true);
+  const [postsIMG, setPostIMG] = useState(true);
+  const [success, setSuccess] = useState(null);
+
 
 
 
 const setUserData = (data) => {
   setUserDB(data)
+}
+function setUserSuccess (mode) {
+  setSuccess(mode)
+  setTimeout(()=>{ setSuccess(null)}, 6000)
+}
+function setUserPostsIMG (data) {
+  setPostIMG(data)
 }
 
   useEffect(() => {
@@ -23,7 +33,7 @@ const setUserData = (data) => {
   },[user])
 
   return (
-    <AuthContext.Provider value={{user, userDB, saveCotizacion, setUser, setUserData, setSaveCotizacion}} >
+    <AuthContext.Provider value={{user, userDB, saveCotizacion, postsIMG, success, setUser, setUserData, setSaveCotizacion, setUserPostsIMG, setUserSuccess}} >
       {!loading && children}
     </AuthContext.Provider>
   )

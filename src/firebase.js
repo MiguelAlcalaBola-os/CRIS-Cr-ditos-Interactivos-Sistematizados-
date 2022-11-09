@@ -23,7 +23,7 @@ const firebaseConfig = {
 // Initialize Firebase
 
 
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 // Firebase Autentication
 
@@ -31,23 +31,36 @@ const auth = getAuth()
 const providerGoogle = new GoogleAuthProvider();
 
 
-function onAuth(setUser,setUserData) {
+function onAuth(setUser, setUserData) {
   return onAuthStateChanged(auth, (user) => {
         if (user) {
               setUser(user)
               getData(setUserData)
+        }else{
+          setUser(null)
         }
   });
 }
 
-const signup = (email, password, navigate) => {
-  createUserWithEmailAndPassword(auth, email, password);
-  navigate("/")
+const signup = (email, password, navigate, setSuccess) => {
+  createUserWithEmailAndPassword(auth, email, password)
+  .then((result) => {
+    navigate("/")
+})
+.catch((error) => {
+  setSuccess(false)
+});
+  
 };
 
-const login = (email, password, navigate) => {
-  signInWithEmailAndPassword(auth, email, password);
+const login = (email, password, navigate, setSuccess) => {
+  signInWithEmailAndPassword(auth, email, password)
+.then((result) => {
   navigate("/")
+})
+.catch((error) => {
+setSuccess(false)
+});
 };
 
 function loginWithGoogle (navigate) {
@@ -89,9 +102,9 @@ function logout ( setUser) {
 
 const db = getDatabase(app);
 
-function writeUserData (object) {
-  console.log("hello")
-  set(ref(db, '/cotizaciones/' + object.nombreDeLaPropiedad.replace(" ","")), object )
+function writeUserData (url, complemento, object) {
+  console.log(object)
+  set(ref(db, url + complemento), object )
   .then(()=> console.log("saved"))
   .catch(()=> console.log('repeat'))
 }
@@ -116,10 +129,10 @@ function getData(setUserData) {
   });
 }
 
-async function removeDataItem (data, setUserData) {
-  await remove(ref(db, '/cotizaciones/' + data))
+async function removeDataItem (url, data, setUserData) {
+  await remove(ref(db, url + data))
   getData(setUserData)
 }
 
 
-export {onAuth, login, signup, logout, loginWithGoogle, resetPassword, writeUserData, removeData, removeDataItem  }
+export {app, onAuth, login, signup, logout, loginWithGoogle, resetPassword, writeUserData, removeData, removeDataItem  }

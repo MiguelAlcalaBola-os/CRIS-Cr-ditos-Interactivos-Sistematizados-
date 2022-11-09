@@ -45,3 +45,16 @@ justify-content: space-between;
 .card-img-top:hover {
   transform: scale(1.8);
 }
+
+.Image1{
+  max-width: 100%;
+    height: auto;
+    left: 0px;
+    right: 0px;
+}
+.solicitudimg{
+  width: auto;
+  height: 25em;
+  left: 0px;
+  right: 0px;
+}

@@ -4,7 +4,7 @@
 }
 .my-flex :nth-child(n) {
   width: 45%;
-  height: 40px;
+  min-height: 40px;
   margin: 5px;
 }
 .card:hover {
@@ -40,6 +40,12 @@
   right: 0;
   margin: 0 auto;
   background: linear-gradient(0.25turn, rgb(19, 49, 62), rgb(19, 49, 62), rgb(31, 111, 146));
+}
+
+.cotizarimg{
+  height: 30em;
+  
+ align-items: center;
 }
 
 
