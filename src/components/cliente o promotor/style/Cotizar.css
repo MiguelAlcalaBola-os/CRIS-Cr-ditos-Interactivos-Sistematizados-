@@ -39,13 +39,27 @@
   left: 0;
   right: 0;
   margin: 0 auto;
-  background: linear-gradient(0.25turn, rgb(19, 49, 62), rgb(19, 49, 62), rgb(31, 111, 146));
+  background: linear-gradient(0.25turn, rgb(7, 59, 81), rgb(30, 66, 82), rgb(3, 84, 119));
+}
+
+
+.Col1{
+  width:70%;
+}
+.Col2 {
+  width: 70%;
+  height: max-content;
+}
+.rowclass {
+ display: flex;
+ width: 100%;
+ margin: auto;
 }
 
 .cotizarimg{
-  height: 30em;
+  width: auto;
+  height: 29em;
   
- align-items: center;
 }
 
 

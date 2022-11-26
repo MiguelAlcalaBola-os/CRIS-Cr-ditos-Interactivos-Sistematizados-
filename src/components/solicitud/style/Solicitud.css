@@ -52,9 +52,49 @@ justify-content: space-between;
     left: 0px;
     right: 0px;
 }
-.solicitudimg{
+.Col1{
+  width:70%;
+}
+.Col2 {
+  width: 70%;
+  height: max-content;
+}
+.rowclass1 {
+ display: flex;
+ width: 100%;
+ margin: auto;
+}
+.solicitudimg1{
   width: auto;
   height: 25em;
-  left: 0px;
-  right: 0px;
+  
+}
+.Col1Send {
+  width:60%;
+}
+.Col2Send {
+  width: 40%;
+  height: max-content;
+}
+.rowclass {
+ display: flex;
+ width: 100%;
+ margin: auto;
+}
+.Col1Succeeded {
+  width:50%;
+}
+.Col2Succeeded {
+  width: 50%;
+  height: max-content;
+}
+.solicitudimg2{
+  width: auto;
+  height: 22em;
+  
+}
+.solicitudimg3{
+  width: auto;
+  height: 25em;
+  
 }

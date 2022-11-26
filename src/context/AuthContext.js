@@ -10,10 +10,9 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [userDB, setUserDB] = useState(null);
   const [saveCotizacion, setSaveCotizacion] = useState(true);
+  const [saveProspectos, setSaveProspectos] = useState(true);
   const [postsIMG, setPostIMG] = useState(true);
   const [success, setSuccess] = useState(null);
-
-
 
 
 const setUserData = (data) => {
@@ -33,7 +32,7 @@ function setUserPostsIMG (data) {
   },[user])
 
   return (
-    <AuthContext.Provider value={{user, userDB, saveCotizacion, postsIMG, success, setUser, setUserData, setSaveCotizacion, setUserPostsIMG, setUserSuccess}} >
+    <AuthContext.Provider value={{user, userDB, saveCotizacion, saveProspectos, postsIMG, success, setUser, setUserData, setSaveCotizacion, setUserPostsIMG, setSaveProspectos, setUserSuccess}} >
       {!loading && children}
     </AuthContext.Provider>
   )

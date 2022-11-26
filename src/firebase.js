@@ -115,6 +115,12 @@ function removeData () {
   .catch(()=>console.log('repeat'));
 
 }
+function removeDataPros () {
+  remove(ref(db, '/prospectos/'))
+  .then(()=>console.log('save'))
+  .catch(()=>console.log('repeat'));
+
+}
 
 
 function getData(setUserData) {
@@ -135,4 +141,4 @@ async function removeDataItem (url, data, setUserData) {
 }
 
 
-export {app, onAuth, login, signup, logout, loginWithGoogle, resetPassword, writeUserData, removeData, removeDataItem  }
+export {app, onAuth, login, signup, logout, loginWithGoogle, resetPassword, writeUserData, removeData, removeDataPros, removeDataItem  }
