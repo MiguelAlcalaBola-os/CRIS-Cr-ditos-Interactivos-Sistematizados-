@@ -31,11 +31,11 @@ const auth = getAuth()
 const providerGoogle = new GoogleAuthProvider();
 
 
-function onAuth(setUser, setUserData) {
+function onAuth(setUser, setUserData, postsIMG, setUserPostsIMG) {
   return onAuthStateChanged(auth, (user) => {
         if (user) {
               setUser(user)
-              getData(setUserData)
+              getData(setUserData, postsIMG, setUserPostsIMG)
         }else{
           setUser(null)
         }

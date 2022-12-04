@@ -28,7 +28,7 @@ function setUserPostsIMG (data) {
 
   useEffect(() => {
     setLoading(false)
-    return onAuth(setUser, setUserData);
+    return onAuth(setUser, setUserData, postsIMG, setUserPostsIMG);
   },[user])
 
   return (

@@ -1,6 +1,7 @@
 import Dashboard from "./pages/home/Dashboard";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Details from "../src/components/details";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
@@ -18,7 +19,7 @@ import { useAuth } from "./context/AuthContext.js";
 import Login2 from "./pages/login/Login";
 import SolicitudesData from "./components/SolicitudesData";
 import Datatable from "./components/datatable/Datatable";
-
+import DashOficial from "../src/Dashboard Oficial/home/Dashboard"
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const { user } = useAuth();
@@ -36,6 +37,7 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="/dashboardoficial" element={<DashOficial/>}></Route>
           <Route path="Login" element={<Login />} />
           <Route path="Register" element={<Register />} />
           <Route
@@ -71,6 +73,13 @@ function App() {
               </PrivateRoute>
             }
           />
+          **<Route
+            path="SolicitudesData/:item"
+            element={
+              <PrivateRoute isAllowed={user}>
+                <Details />
+              </PrivateRoute>}
+          />**
           <Route path="/">
             <Route path="users">
               <Route index element={<List />} />

@@ -1,7 +1,7 @@
 import { app } from './firebase'
 import { getStorage, ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 
-const storage = getStorage(app)
+const storage = getStorage(app) 
 
 //--------------------------- Firebase Storage ---------------------------
 function uploadIMG(file, fileName, setUserSuccess, postsIMG, setUserPostsIMG) {
@@ -30,11 +30,11 @@ function downloadIMG(fileName, postsIMG, setUserPostsIMG) {
 }
 
 
-const listRef = ref(storage, '/');
+const listRef = ref(storage, '/') 
 
 function getList(postsIMG, setUserPostsIMG) {
 
-    listAll(listRef)
+     listAll(listRef)
         .then((res) => {
             res.prefixes.forEach((folderRef) => {
                 // All the prefixes under listRef.
