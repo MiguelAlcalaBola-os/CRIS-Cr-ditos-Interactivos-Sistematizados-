@@ -14,15 +14,20 @@ export function Register() {
     password: "",
   });
 
+  const [rol, setRol] = useState('cliente');
+
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signup(userRegister.email, userRegister.password, navigate, setUserSuccess)
+    signup(userRegister.email, userRegister.password, navigate, setUserSuccess, rol)
+  };
+  const handleOnChange= (e) => {
+    setRol(e.target.value)
   };
 
-
+  console.log(rol)
   useEffect(() => {
     if(user) {navigate("/")}
   })
@@ -52,6 +57,14 @@ export function Register() {
               onChange={(e) => setUser({ ...userRegister, password: e.target.value })}
               className="form-control"
               placeholder="Ingrese su contraseña" />
+          </div> <br />
+          <div class="form-group">
+          <label>Rol</label> <br />
+          
+          <select id="rol" className="form-control" onChange={handleOnChange}>
+               <option value="cliente">cliente</option>
+            <option value="oficial">oficial</option>
+          </select>
           </div> <br />
           <div className="d-flex justify-content-center">
             <button type="submit" class="btn btn-primary w-50 mr-5">Sign In</button>

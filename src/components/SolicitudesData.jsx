@@ -37,6 +37,8 @@ export function SolicitudesData() {
                         <th>Cedula</th>
                         <th>Tasa de interes anual</th>
                         <th>Precio de venta</th>
+                        <th>Estado</th>
+                        <th>Observaciones</th>
                         <th>Borrar</th>
                     </tr>
                 </thead>
@@ -53,6 +55,8 @@ export function SolicitudesData() {
                                 <td>{userDB.solicitudes[item].Cedula}</td>
                                 <td>{userDB.solicitudes[item]["Tasa de interes anual"]}</td>
                                 <td>{userDB.solicitudes[item]["Precio de ventas"]}$</td>
+                                <td>{userDB.solicitudes[item].estado ? userDB.solicitudes[item].estado : 'Pendiente' }</td>
+                                <td>{userDB.solicitudes[item].observaciones ? userDB.solicitudes[item].observaciones : 'Sin Observaciones' }</td>
                                 <td><button type="button" class="btn btn-danger" onClick={() => remove(item)}>Eliminar</button></td>
                             </tr>
                         </tbody>

@@ -1,14 +1,30 @@
 import Sidebar from "../sidebar Ofical/Sidebar"
 import Navbar from "../navbar Oficial/Navbar"
 import "./home.scss";
+import { Link, useNavigate  } from "react-router-dom";
+import { useAuth } from '../../context/AuthContext.js'
+
 import Widget from "../../components/widget/Widget";
 import Featured from "../../components/featured/Featured";
 import Chart from "../../components/chart/Chart";
 import Table from "../../components/table/Table";
+import { useState, useEffect } from "react";
+
 import CardsDashboardOficial from "../../Dashboard Oficial/CardsDashboardOficial";
 const Dashboard = () => {
+
+  
+
+  const {user, userDB, setUserData, postsIMG, setUserPostsIMG, setUserSuccess, success } = useAuth()
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'cliente'){ navigate('/') }
+}, [userDB]);
   return (
-    <div className="home">
+    <>
+    {userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'oficial' && <div className="home">
       <Sidebar />
       <div className="homeContainer">
         <Navbar />
@@ -25,7 +41,8 @@ const Dashboard = () => {
           <div className="listTitle">Ultimas efectuaciones</div>
         </div>
       </div>
-    </div>
+    </div>}
+    </>
   );
 };
 

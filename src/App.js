@@ -1,7 +1,7 @@
 import Dashboard from "./pages/home/Dashboard";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Details from "../src/components/details";
+import Details from "./components/Details";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
@@ -18,6 +18,10 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import { useAuth } from "./context/AuthContext.js";
 import Login2 from "./pages/login/Login";
 import SolicitudesData from "./components/SolicitudesData";
+import Pendientes from "./components/Pendientes";
+import Aprobadas from "./components/Aprobadas";
+import Rechazadas from "./components/Rechazadas";
+
 import Datatable from "./components/datatable/Datatable";
 import DashOficial from "../src/Dashboard Oficial/home/Dashboard"
 function App() {
@@ -37,7 +41,15 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="/dashboardoficial" element={<DashOficial/>}></Route>
+
+          <Route
+            path="/dashboardoficial"
+            element={
+              <PrivateRoute isAllowed={user}>
+               <DashOficial/>
+              </PrivateRoute>
+            }
+          />
           <Route path="Login" element={<Login />} />
           <Route path="Register" element={<Register />} />
           <Route
@@ -70,6 +82,30 @@ function App() {
             element={
               <PrivateRoute isAllowed={user}>
                 <SolicitudesData />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="Pendientes"
+            element={
+              <PrivateRoute isAllowed={user}>
+                <Pendientes />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="Aprobadas"
+            element={
+              <PrivateRoute isAllowed={user}>
+                <Aprobadas />
+              </PrivateRoute>
+            }
+            />
+            <Route
+            path="Rechazadas"
+            element={
+              <PrivateRoute isAllowed={user}>
+                <Rechazadas />
               </PrivateRoute>
             }
           />

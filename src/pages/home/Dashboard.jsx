@@ -1,14 +1,34 @@
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "./home.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import Widget from "../../components/widget/Widget";
 import Featured from "../../components/featured/Featured";
 import Chart from "../../components/chart/Chart";
 import Table from "../../components/table/Table";
 import Cards from "../../components/Cards";
+import { useAuth } from '../../context/AuthContext.js'
+
+import { useState, useEffect } from "react";
+
 const Dashboard = () => {
+
+
+
+
+  const {user, userDB, setUserData, postsIMG, setUserPostsIMG, setUserSuccess, success } = useAuth()
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'oficial'){ navigate('/dashboardoficial') }
+}, [userDB]);
+
+
   return (
+
+    <>
+{ userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'cliente' &&
     <div className="home">
       <Sidebar />
       <div className="homeContainer">
@@ -25,11 +45,12 @@ const Dashboard = () => {
         <div className="listContainer">
           <div className="listTitle">Ultimas efectuaciones</div>
         </div>
-        <Link  to="/dashboardoficial" style={{ textDecoration: "none" }}>
+        {/* <Link  to="/dashboardoficial" style={{ textDecoration: "none" }}>
         <button>dashboard oficial</button>
-        </Link>
+        </Link> */}
       </div>
-    </div>
+    </div>}
+    </>
   );
 };
 

@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import {
       getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail,
     } from "firebase/auth";
-import { getDatabase, ref, onValue, set, child, get, remove} from "firebase/database";
+import { getDatabase, ref, onValue, set, update, child, get, remove} from "firebase/database";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -42,9 +42,16 @@ function onAuth(setUser, setUserData, postsIMG, setUserPostsIMG) {
   });
 }
 
-const signup = (email, password, navigate, setSuccess) => {
+const signup = (email, password, navigate, setSuccess, rol) => {
   createUserWithEmailAndPassword(auth, email, password)
   .then((result) => {
+    //console.log(result.user.uid)
+    const url = 'users/'
+    const complemento =  `${result.user.uid}`
+    const object = {
+      rol,
+    }
+    writeUserData(url, complemento, object)
     navigate("/")
 })
 .catch((error) => {
@@ -104,7 +111,7 @@ const db = getDatabase(app);
 
 function writeUserData (url, complemento, object) {
   console.log(object)
-  set(ref(db, url + complemento), object )
+  update(ref(db, url + complemento), object )
   .then(()=> console.log("saved"))
   .catch(()=> console.log('repeat'))
 }

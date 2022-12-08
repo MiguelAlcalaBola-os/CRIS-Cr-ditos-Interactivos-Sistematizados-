@@ -13,7 +13,7 @@ const cards = [
     id: 1,
     title: "Pendientes",
     image: image1,
-    link: "/Solicitud",
+    link: "/Pendientes",
     text: "Revisa las solicitudes que aún están pendientes",
     buttontext: "Pendientes"
   },
@@ -45,7 +45,7 @@ const cards = [
     id: 5,
     title: "Aprobadas",
     image: image5,
-    link: "/users/new",
+    link: "/Aprobadas",
     text: "Descripcion pendiente",
     buttontext: "Aprobadas"
   },
@@ -53,7 +53,7 @@ const cards = [
     id: 6,
     title: "Rechazadas",
     image: image6,
-    link: "/users/new",
+    link: "/Rechazadas",
     text: "Descripcion pendiente",
     buttontext: "Rechazadas"
   },
