@@ -1,5 +1,5 @@
-import Sidebar from "../sidebar Ofical/Sidebar"
-import Navbar from "../navbar Oficial/Navbar"
+import Sidebar from "../sidebar Credito Verficacion/Sidebar"
+import Navbar from "../navbar Credito Verficacion/Navbar"
 import "./home.scss";
 import { Link, useNavigate  } from "react-router-dom";
 import { useAuth } from '../../context/AuthContext.js'
@@ -10,7 +10,7 @@ import Chart from "../../components/chart/Chart";
 import Table from "../../components/table/Table";
 import { useState, useEffect } from "react";
 
-import CardsDashboardOficial from "../../Dashboard Oficial/CardsDashboardOficial";
+import CardsDashboardOficial from "../../Dashboard Credito Verificacion/CardsDashboardCreditoVerficacion";
 const Dashboard = () => {
 
   
@@ -40,11 +40,10 @@ const Dashboard = () => {
         <div className="listContainer">
           <div className="listTitle">Ultimas efectuaciones</div>
         </div>
-        <Link to="/DashCreditoVerificacion" style={{ textDecoration: "none" }}>
-      <button>Dashboard Credito Verificacion</button>
+        <Link to="/DashCreditoAnalisis" style={{ textDecoration: "none" }}>
+      <button>Dashboard Credito Analisis</button>
       </Link>
       </div>
-      
     </div>
     }
     </>

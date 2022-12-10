@@ -1,20 +1,12 @@
 import "./sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import MarkAsUnreadIcon from '@mui/icons-material/MarkAsUnread';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
-import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
-import PriceCheckIcon from '@mui/icons-material/PriceCheck';
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import BookmarksIcon from "@mui/icons-material/Bookmarks";
-import DoNotDisturbOffIcon from '@mui/icons-material/DoNotDisturbOff';
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import RecommendIcon from '@mui/icons-material/Recommend';
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link } from "react-router-dom";
@@ -23,7 +15,7 @@ import { useContext, useState } from "react";
 import { useAuth } from "../../context/AuthContext.js";
 import { logout } from "../../firebase";
 import "./style.css";
-import { display } from "@mui/system";
+
 
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
@@ -86,67 +78,18 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/Pendientes" style={{ textDecoration: "none" }}>
+            <Link to="/Solicitud" style={{ textDecoration: "none" }}>
               <PendingActionsIcon className="icon" />
               <span>Pendientes</span>
             </Link>
           </li>
           <li>
             <Link to="/Cotizar" style={{ textDecoration: "none" }}>
-              <MarkAsUnreadIcon className="icon" />
-              <span>Cartas</span>
+              <VerifiedUserIcon className="icon" />
+              <span>Verificadas</span>
             </Link>
           </li>
-          <li>
-            <Link to="/Datos" style={{ textDecoration: "none" }}>
-              <ManageSearchIcon className="icon" />
-              <span>Tramites</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/Datos" style={{ textDecoration: "none" }}>
-              <PriceCheckIcon className="icon" />
-              <span>Credito</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/Aprobadas" style={{ textDecoration: "none" }}>
-              <RecommendIcon className="icon" />
-              <span>Aprovadas</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/Rechazadas" style={{ textDecoration: "none" }}>
-              <DoNotDisturbOffIcon className="icon" />
-              <span>Rechazadas</span>
-            </Link>
-          </li>
-          <p className="title">Listas</p>
-          <Link to="/SolicitudesData" style={{ textDecoration: "none" }}>
-            <li>
-              <FormatAlignLeftIcon className="icon" />
-              <span>Historial de solicitudes</span>
-            </li>
-          </Link>
-          <Link to="/UserData" style={{ textDecoration: "none" }}>
-            <li>
-              <BookmarksIcon className="icon" />
-              <span>Cotizaciones Guardadas</span>
-            </li>
         
-          </Link>
-          <Link to="/Datatable" style={{ textDecoration: "none" }}>
-           
-            <li>
-              <GroupAddIcon className="icon" />
-              <span>Prospectos Registrados</span>
-            </li>
-
-            <li>
-              <GroupAddIcon className="icon" />
-              <span>Solicitudes imcompletas</span>
-            </li>
-          </Link>
 
           <p className="title">Utilidades</p>
 

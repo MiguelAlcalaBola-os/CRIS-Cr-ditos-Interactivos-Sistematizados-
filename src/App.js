@@ -1,7 +1,7 @@
 import Dashboard from "./pages/home/Dashboard";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Details from "./components/Details";
+import Details from "./components/details";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
@@ -21,9 +21,10 @@ import SolicitudesData from "./components/SolicitudesData";
 import Pendientes from "./components/Pendientes";
 import Aprobadas from "./components/Aprobadas";
 import Rechazadas from "./components/Rechazadas";
-
+import DashCreditoVerificacion from "../src/Dashboard Credito Verificacion/home/Dashboard"
 import Datatable from "./components/datatable/Datatable";
 import DashOficial from "../src/Dashboard Oficial/home/Dashboard"
+import DashCreditoAnalisis from "../src/Dashboard Credito Analisis/home/Dashboard"
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const { user } = useAuth();
@@ -50,6 +51,8 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path= "/DashCreditoVerificacion" element={<DashCreditoVerificacion />}></Route>
+          <Route path= "/DashCreditoAnalisis" element={<DashCreditoAnalisis />}></Route>
           <Route path="Login" element={<Login />} />
           <Route path="Register" element={<Register />} />
           <Route
