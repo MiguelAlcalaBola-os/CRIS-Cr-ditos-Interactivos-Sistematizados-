@@ -1,8 +1,8 @@
 import React from "react";
 import Card from "./CardDashboardCreditoAnalisis";
 import image1 from "../assets/pendientes.png";
-import image2 from '../assets/Credito Verificacion VERIFICADAS.png'
-
+import image2 from '../assets/aprobadas.png'
+import image3 from '../assets/rechazadas.png'
 
 
 const cards = [
@@ -16,13 +16,20 @@ const cards = [
   },
   {
     id: 2,
-    title: "Verificadas",
+    title: "Aprobadas",
     image: image2,
-    link: "/Cotizar",
+    link: "/Aprobadas",
     text: "Descripcion pendiente",
-    buttontext: "Cartas"
+    buttontext: "Aprobadas"
   },
-
+  {
+    id: 3,
+    title: "Rechazadas",
+    image: image3,
+    link: "/Rechazadas",
+    text: "Descripcion pendiente",
+    buttontext: "Rechazadas"
+  },
 ];
 
 function Cards() {

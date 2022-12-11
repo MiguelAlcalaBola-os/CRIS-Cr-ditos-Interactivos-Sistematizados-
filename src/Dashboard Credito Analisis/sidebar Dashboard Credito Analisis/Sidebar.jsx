@@ -15,8 +15,8 @@ import { useContext, useState } from "react";
 import { useAuth } from "../../context/AuthContext.js";
 import { logout } from "../../firebase";
 import "./style.css";
-
-
+import RecommendIcon from '@mui/icons-material/Recommend';
+import DoNotDisturbOffIcon from '@mui/icons-material/DoNotDisturbOff';
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
   const { setUser, saveCotizacion } = useAuth();
@@ -85,11 +85,16 @@ const Sidebar = () => {
           </li>
           <li>
             <Link to="/Cotizar" style={{ textDecoration: "none" }}>
-              <VerifiedUserIcon className="icon" />
-              <span>Verificadas</span>
+              <RecommendIcon className="icon" />
+              <span>Aprobadas</span>
             </Link>
           </li>
-        
+          <li>
+            <Link to="/Cotizar" style={{ textDecoration: "none" }}>
+              <DoNotDisturbOffIcon className="icon" />
+              <span>Rechazadas</span>
+            </Link>
+          </li>
 
           <p className="title">Utilidades</p>
 

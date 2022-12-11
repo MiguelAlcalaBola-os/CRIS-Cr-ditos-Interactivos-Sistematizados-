@@ -30,7 +30,7 @@ const Dashboard = () => {
         <Navbar />
         <div className="text-center">
           <br></br>
-          <h3>Bienvenido a Cris USUARIO TIPO OFICIAL (Créditos Interactivos Sistematizados)</h3>
+          <h3>Bienvenido a Cris USUARIO de CREDITO Y VERIFICACION (Créditos Interactivos Sistematizados)</h3>
           <p>Este es tu tablero de Oficial bancario, podras aceptar, rechazar o devolver las solicitudes de los clientes y darle su respectivo feedback</p>
         </div>
         <div className="widgets">
