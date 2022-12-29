@@ -1,7 +1,9 @@
 import Dashboard from "./pages/home/Dashboard";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Details from "./components/details";
+import Details from "./components/Details";
+import DashboardCartas from "../src/Dashboard Cartas/home/Dashboard"
+import DashboardPipeline from "./Dashboard Pipeline/home/Dashboard"
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
@@ -19,6 +21,9 @@ import { useAuth } from "./context/AuthContext.js";
 import Login2 from "./pages/login/Login";
 import SolicitudesData from "./components/SolicitudesData";
 import Pendientes from "./components/Pendientes";
+import PendientesCV from "./components/PendientesCV";
+import Verificadas from "./components/Verificadas";
+
 import Aprobadas from "./components/Aprobadas";
 import Rechazadas from "./components/Rechazadas";
 import DashCreditoVerificacion from "../src/Dashboard Credito Verificacion/home/Dashboard"
@@ -47,36 +52,50 @@ function App() {
             path="/dashboardoficial"
             element={
               <PrivateRoute isAllowed={user}>
-               <DashOficial/>
+                <DashOficial />
               </PrivateRoute>
             }
           />
-          <Route path= "/DashCreditoVerificacion" element={<DashCreditoVerificacion />}></Route>
-          <Route path= "/DashCreditoAnalisis" element={<DashCreditoAnalisis />}></Route>
+
+          <Route
+            path="/DashCreditoAnalisis"
+            element={
+              <PrivateRoute isAllowed={user}>
+                <DashCreditoAnalisis />
+              </PrivateRoute>
+            }
+          />
+          {/* <Route path="/DashCreditoVerificacion" element={<DashCreditoVerificacion />}></Route> */}
           <Route path="Login" element={<Login />} />
           <Route path="Register" element={<Register />} />
-          <Route
-            element={<PrivateRoute isAllowed={user} redirectTo="/Login" />}
-          >
+
+          
+          <Route path="/DashboardPipeline" element={<DashboardPipeline />} />
+          <Route path="/DashCartas" element={<DashboardCartas />} />
+          <Route element={<PrivateRoute isAllowed={user} redirectTo="/Login" />}>
             <Route index element={<Dashboard />} />
           </Route>
           <Route
-            element={<PrivateRoute isAllowed={user} redirectTo="/Solicitud" />}
-          >
+            path="DashCreditoVerificacion"
+            element={
+              <PrivateRoute isAllowed={user}>
+                <DashCreditoVerificacion />
+              </PrivateRoute>
+            }
+          />
+          <Route element={<PrivateRoute isAllowed={user} redirectTo="/Solicitud" />}>
             <Route path="/Solicitud" element={<Solicitud />} />
           </Route>
-          <Route
-            element={<PrivateRoute isAllowed={user} redirectTo="/Datos" />}
-          >
+
+          <Route element={<PrivateRoute isAllowed={user} redirectTo="/Datos" />}>
             <Route path="/Datos" element={<Datos />} />
           </Route>
-          <Route
-            element={<PrivateRoute isAllowed={user} redirectTo="/Datatable" />}
-          >
+
+          <Route element={<PrivateRoute isAllowed={user} redirectTo="/Datatable" />}>
             <Route path="/Datatable" element={<Datatable />} />
           </Route>
-          <Route
-            element={<PrivateRoute isAllowed={user} redirectTo="/Cotizar" />}
+
+          <Route element={<PrivateRoute isAllowed={user} redirectTo="/Cotizar" />}
           >
             <Route path="/Cotizar" element={<Cotizar />} />
           </Route>
@@ -89,10 +108,26 @@ function App() {
             }
           />
           <Route
+            path="Verificadas"
+            element={
+              <PrivateRoute isAllowed={user}>
+                <Verificadas />
+              </PrivateRoute>
+            }
+          />
+          <Route
             path="Pendientes"
             element={
               <PrivateRoute isAllowed={user}>
                 <Pendientes />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="PendientesCV"
+            element={
+              <PrivateRoute isAllowed={user}>
+                <PendientesCV />
               </PrivateRoute>
             }
           />
@@ -103,8 +138,8 @@ function App() {
                 <Aprobadas />
               </PrivateRoute>
             }
-            />
-            <Route
+          />
+          <Route
             path="Rechazadas"
             element={
               <PrivateRoute isAllowed={user}>
@@ -119,7 +154,7 @@ function App() {
                 <Details />
               </PrivateRoute>}
           />**
-          <Route path="/">
+          {/* <Route path="/">
             <Route path="users">
               <Route index element={<List />} />
               <Route path=":userId" element={<Single />} />
@@ -136,7 +171,7 @@ function App() {
                 element={<New inputs={productInputs} title="Add New Product" />}
               />
             </Route>
-          </Route>
+          </Route> */}
         </Routes>
       </BrowserRouter>
     </div>

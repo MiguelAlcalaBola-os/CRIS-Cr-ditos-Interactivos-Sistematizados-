@@ -20,11 +20,11 @@ const Dashboard = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'cliente'){ navigate('/') }
+    if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol !== 'creditoAnalisis'){ navigate('/') }
 }, [userDB]);
   return (
     <>
-    {userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'oficial' && <div className="home">
+    {userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'creditoAnalisis' && <div className="home">
       <Sidebar />
       <div className="homeContainer">
         <Navbar />
@@ -40,6 +40,9 @@ const Dashboard = () => {
         <div className="listContainer">
           <div className="listTitle">Ultimas efectuaciones</div>
         </div>
+        <Link to="/DashCartas" style={{ textDecoration: "none" }}>
+      <button>Dashboard Cartas</button>
+      </Link>
       </div>
     </div>}
     </>

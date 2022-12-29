@@ -20,8 +20,6 @@ export function SolicitudesData() {
 
     const navigate = useNavigate();
 
-
-
     const handlerSolicitud = (item, data) => {
         const observations = feedback[item] ? { observaciones: feedback[item] } : null;
         const object = { estado: data, ...observations }
@@ -64,30 +62,11 @@ export function SolicitudesData() {
         setModal(!modal)
     }
 
-
     useEffect(() => {
         postsIMG === true && getList(postsIMG, setUserPostsIMG)
     }, [postsIMG]);
     return (
         <>
-
-            {success == 'Reprobado' && <Error>Reprobado</Error>}
-            {success == 'Aprobado' && <Success>Aprobado</Success>}
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class={`nav-link ${estado === undefined && 'active'}`} href="#!" onClick={() => handlerEstado(undefined)}>Nuevos</a>
-                </li>
-                <li class="nav-item">
-                    <a class={`nav-link ${estado === 'Enviado' && 'active'}`} href="#!" onClick={() => handlerEstado('Enviado')}>Enviadas</a>
-                </li>
-                <li class="nav-item">
-                    <a class={`nav-link ${estado === 'Devuelto' && 'active'}`} href="#!" onClick={() => handlerEstado('Devuelto')}>Devueltos</a>
-                </li>
-                <li class="nav-item">
-                    <a class={`nav-link ${estado === 'Reconsiderada' && 'active'}`} href="#!" onClick={() => handlerEstado('Reconsiderada')}>Reconsideradas</a>
-                </li>
-            </ul>
-
             <table className="table h-100">
                 <thead>
                     <tr>
@@ -98,18 +77,13 @@ export function SolicitudesData() {
                         <th>Tasa de interes anual</th>
                         <th>Precio de venta</th>
                         <th>Observationes</th>
-                        {estado ===  'Devuelto' && <th>Enviar</th>}
-                        {estado === 'Enviado'&& <th>Devolver</th>}
-                        { estado === undefined && <th>Enviar</th>}
-                        { estado === undefined && <th>Devolver</th>}
-
+                   <th>Modificar</th>
+              
                     </tr>
                 </thead>
-
-
                 {userDB && Object.keys(userDB.solicitudes).map((item, index) =>
                     <>
-                        {userDB.solicitudes[item].estado == 'Enviado' && <tbody>
+                        {userDB.solicitudes[item].estado == 'Aprobado' || userDB.solicitudes[item].estado == 'Reprobado' ? <tbody>
 
                             <tr>
                                 <th scope="row">{index}</th>
@@ -118,19 +92,15 @@ export function SolicitudesData() {
                                 <td onClick={() => handlerItemClick(item)}>{userDB.solicitudes[item].Cedula}</td>
                                 <td>{userDB.solicitudes[item]["Tasa de interes anual"]}</td>
                                 <td>{userDB.solicitudes[item]["Precio de ventas"]}$</td>
-                               <td> <input name={item} onChange={handleOnChange} placeholder="Observaciones" /> </td>
-                               {estado === 'Devuelto'  && <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item,  'Enviado')}>Enviar/Guardar</button></td>}
-                                {estado === 'Enviado'  && <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'Devuelto')}>Devolver/Guardar</button></td>}
-                                { estado === undefined && <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item,  'Enviado')}>Enviar/Guardar</button></td>}
-                                { estado === undefined && <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'Devuelto')}>Devolver/Guardar</button></td>}
-                            
+                                <td> <input name={item} onChange={handleOnChange} placeholder="Observaciones" /> </td>
+                                {userDB.solicitudes[item].estado == 'Reprobado' && <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item, 'Aprobado')}>Aprobar/Guardar</button></td>}
+                                {userDB.solicitudes[item].estado == 'Aprobado' && <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'Reprobado')}>Reprobar/Guardar</button></td>}
                             </tr>
-                        </tbody>}
+                        </tbody> : ''}
                     </>
                 )}
             </table>
             {modal && <Modal item={item} funcion={handlerSolicitud} funcionName={funcion} close={close} />}
-
         </>
     );
 }

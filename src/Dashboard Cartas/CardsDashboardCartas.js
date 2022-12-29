@@ -1,28 +1,35 @@
 import React from "react";
-import Card from "./CardDashboardCreditoVerficacion";
-import image1 from "../assets/pendientes.png";
-import image2 from '../assets/Credito Verificacion VERIFICADAS.png'
-
+import Card from "./CardDashboardCartas";
+import image1 from "../assets/aprobadas.png";
+import image2 from '../assets/RENOVACIONES.png'
+import image3 from '../assets/COMPLETADAS.png'
 
 
 const cards = [
   {
     id: 1,
-    title: "Pendientes",
+    title: "Aprobaciones",
     image: image1,
-    link: "/PendientesCV",
+    link: "/Pendientes",
     text: "Revisa las solicitudes que aún están pendientes",
     buttontext: "Pendientes"
   },
   {
     id: 2,
-    title: "Verificadas",
+    title: "Renovaciones",
     image: image2,
-    link: "/Verificadas",
+    link: "/Aprobadas",
     text: "Descripcion pendiente",
-    buttontext: "Cartas"
+    buttontext: "Renovaciones"
   },
-
+  {
+    id: 3,
+    title: "Completadas",
+    image: image3,
+    link: "/Rechazadas",
+    text: "Descripcion pendiente",
+    buttontext: "Completadas"
+  },
 ];
 
 function Cards() {
@@ -30,7 +37,7 @@ function Cards() {
     <div className="container d-flex justify-content-center align-items-center h-100 ">
       <div className="row">
         {cards.map(({ title, image, url, id, text, link, buttontext }) => (
-          <div className="col-6" key={id}>
+          <div className="col-4" key={id}>
             <Card imageSource={image} title={title} url={url} text={text} buttontext={buttontext}
             link={link}/>
           </div>

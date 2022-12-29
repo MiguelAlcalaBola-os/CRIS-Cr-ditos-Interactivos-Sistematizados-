@@ -64,6 +64,8 @@ export function Register() {
           <select id="rol" className="form-control" onChange={handleOnChange}>
                <option value="cliente">cliente</option>
             <option value="oficial">oficial</option>
+            <option value="creditosDeVerificacion">Creditos de verificacion</option>
+            <option value="creditoAnalisis">Creditos Analasis</option>
           </select>
           </div> <br />
           <div className="d-flex justify-content-center">

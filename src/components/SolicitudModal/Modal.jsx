@@ -12,8 +12,8 @@ export default function Modal({ item, funcion, funcionName, close}) {
             <div className='d-flex flex-column justify-content-center align-items-center  bg-light w-50 h-50 color-dark'>
             <span onClick={close}>X</span>
             <img src="/modal.jpeg" alt="" />
-            Esta seguro de {funcionName.toUpperCase()} a {userDB.solicitudes[item].Nombres}?
-            <button className={`btn text-light rounded-5 py-1 px-5 ${styles.button}`} onClick={()=>funcion(item)}>Confirmar</button>
+           {userDB.solicitudes[item].Nombres.toUpperCase()} esta aputo de ser {funcionName.toUpperCase()} 
+            <button className={`btn text-light rounded-5 py-1 px-5 ${styles.button}`} onClick={()=>funcion(item, funcionName )}>Confirmar</button>
             </div>
         </div>
     )

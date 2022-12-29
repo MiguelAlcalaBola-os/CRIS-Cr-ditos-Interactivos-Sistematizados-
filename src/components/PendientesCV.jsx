@@ -71,22 +71,7 @@ export function SolicitudesData() {
     return (
         <>
 
-            {success == 'Reprobado' && <Error>Reprobado</Error>}
-            {success == 'Aprobado' && <Success>Aprobado</Success>}
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class={`nav-link ${estado === undefined && 'active'}`} href="#!" onClick={() => handlerEstado(undefined)}>Nuevos</a>
-                </li>
-                <li class="nav-item">
-                    <a class={`nav-link ${estado === 'Enviado' && 'active'}`} href="#!" onClick={() => handlerEstado('Enviado')}>Enviadas</a>
-                </li>
-                <li class="nav-item">
-                    <a class={`nav-link ${estado === 'Devuelto' && 'active'}`} href="#!" onClick={() => handlerEstado('Devuelto')}>Devueltos</a>
-                </li>
-                <li class="nav-item">
-                    <a class={`nav-link ${estado === 'Reconsiderada' && 'active'}`} href="#!" onClick={() => handlerEstado('Reconsiderada')}>Reconsideradas</a>
-                </li>
-            </ul>
+        
 
             <table className="table h-100">
                 <thead>
@@ -98,10 +83,9 @@ export function SolicitudesData() {
                         <th>Tasa de interes anual</th>
                         <th>Precio de venta</th>
                         <th>Observationes</th>
-                        {estado ===  'Devuelto' && <th>Enviar</th>}
-                        {estado === 'Enviado'&& <th>Devolver</th>}
-                        { estado === undefined && <th>Enviar</th>}
-                        { estado === undefined && <th>Devolver</th>}
+                        <th>Aprobar</th>
+                   <th>Reprobar</th>
+                       
 
                     </tr>
                 </thead>
@@ -119,10 +103,8 @@ export function SolicitudesData() {
                                 <td>{userDB.solicitudes[item]["Tasa de interes anual"]}</td>
                                 <td>{userDB.solicitudes[item]["Precio de ventas"]}$</td>
                                <td> <input name={item} onChange={handleOnChange} placeholder="Observaciones" /> </td>
-                               {estado === 'Devuelto'  && <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item,  'Enviado')}>Enviar/Guardar</button></td>}
-                                {estado === 'Enviado'  && <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'Devuelto')}>Devolver/Guardar</button></td>}
-                                { estado === undefined && <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item,  'Enviado')}>Enviar/Guardar</button></td>}
-                                { estado === undefined && <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'Devuelto')}>Devolver/Guardar</button></td>}
+                               <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item,  'Aprobado')}>Enviar/Guardar</button></td>
+                                <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'Reprobado')}>Devolver/Guardar</button></td>
                             
                             </tr>
                         </tbody>}
