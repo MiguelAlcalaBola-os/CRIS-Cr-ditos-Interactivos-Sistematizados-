@@ -10,12 +10,12 @@ import Success from './Success'
 import { getList } from "../storageFB";
 
 export function SolicitudesData() {
-    const { userDB, setUserData, postsIMG, setUserPostsIMG, setUserSuccess, success } = useAuth()
+    const { userDB, setUserData, postsIMG, setUserPostsIMG, setUserSuccess, success, } = useAuth()
     const [modal, setModal] = useState(false);
     const [feedback, setFeedback] = useState({})
     const [item, setItem] = useState(null)
     const [funcion, setFuncion] = useState(null)
-    const [estado, setEstado] = useState(undefined)
+    const [estado, setEstado] = useState(undefined) 
 
 
     const navigate = useNavigate();
@@ -23,8 +23,7 @@ export function SolicitudesData() {
 
 
     const handlerSolicitud = (item, data) => {
-        const observations = feedback[item] ? { observaciones: feedback[item] } : null;
-        const object = { estado: data, ...observations }
+        const object = { estado: data, ...feedback }
         const url = `solicitudes/${item}`
         const complemento = ''
         writeUserData(url, complemento, object)
@@ -98,6 +97,8 @@ export function SolicitudesData() {
                         <th>Tasa de interes anual</th>
                         <th>Precio de venta</th>
                         <th>Observationes</th>
+                        <th>Fecha de E</th>
+
                         {estado ===  'Devuelto' && <th>Enviar</th>}
                         {estado === 'Enviado'&& <th>Devolver</th>}
                         { estado === undefined && <th>Enviar</th>}
@@ -109,7 +110,7 @@ export function SolicitudesData() {
 
                 {userDB && Object.keys(userDB.solicitudes).map((item, index) =>
                     <>
-                        {userDB.solicitudes[item].estado == 'Enviado' && <tbody>
+                        {userDB.solicitudes[item].estado == estado && <tbody>
 
                             <tr>
                                 <th scope="row">{index}</th>
@@ -118,7 +119,8 @@ export function SolicitudesData() {
                                 <td onClick={() => handlerItemClick(item)}>{userDB.solicitudes[item].Cedula}</td>
                                 <td>{userDB.solicitudes[item]["Tasa de interes anual"]}</td>
                                 <td>{userDB.solicitudes[item]["Precio de ventas"]}$</td>
-                               <td> <input name={item} onChange={handleOnChange} placeholder="Observaciones" /> </td>
+                               <td> <input name='observaciones' onChange={handleOnChange} placeholder="Observaciones" /> </td>
+                               <td><input type='date' name='fecha' onChange={handleOnChange} /></td>
                                {estado === 'Devuelto'  && <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item,  'Enviado')}>Enviar/Guardar</button></td>}
                                 {estado === 'Enviado'  && <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'Devuelto')}>Devolver/Guardar</button></td>}
                                 { estado === undefined && <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item,  'Enviado')}>Enviar/Guardar</button></td>}

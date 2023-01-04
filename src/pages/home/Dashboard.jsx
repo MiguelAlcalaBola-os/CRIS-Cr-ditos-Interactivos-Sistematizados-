@@ -24,7 +24,8 @@ const Dashboard = () => {
     if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'oficial'){ navigate('/dashboardoficial') }
     if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'creditosDeVerificacion'){ navigate('/DashCreditoVerificacion') }
     if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'creditoAnalisis'){ navigate('/DashCreditoAnalisis') }
-
+    if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'cartas'){ navigate('/DashCartas') }
+    if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'pipeline'){ navigate('/DashboardPipeline') }
 }, [userDB]);
 
 

@@ -10,7 +10,7 @@ const cards = [
     id: 1,
     title: "Entregas Inmediatas",
     image: image1,
-    link: "/Pendientes",
+    link: "/EntregasInmediatas",
     text: "Revisa las solicitudes que aún están pendientes",
     buttontext: "Pendientes"
   },
@@ -18,7 +18,7 @@ const cards = [
     id: 2,
     title: "Entregas Futuras",
     image: image2,
-    link: "/Aprobadas",
+    link: "/EntregasFuturas",
     text: "Descripcion pendiente",
     buttontext: "Renovaciones"
   },

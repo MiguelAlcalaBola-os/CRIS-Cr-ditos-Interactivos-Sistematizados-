@@ -15,7 +15,7 @@ export function SolicitudesData() {
     const [feedback, setFeedback] = useState({})
     const [item, setItem] = useState(null)
     const [funcion, setFuncion] = useState(null)
-    const [estado, setEstado] = useState('Enviado')
+    const [estado, setEstado] = useState(undefined)
 
 
     const navigate = useNavigate();
@@ -68,20 +68,13 @@ export function SolicitudesData() {
     useEffect(() => {
         postsIMG === true && getList(postsIMG, setUserPostsIMG)
     }, [postsIMG]);
+
+
+
     return (
         <>
 
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class={`nav-link ${estado === 'Enviado' && 'active'}`} href="#!" onClick={() => handlerEstado('Enviado')}>Pencientes</a>
-                </li>
-                <li class="nav-item">
-                    <a class={`nav-link ${estado === 'EnviadoCV' && 'active'}`} href="#!" onClick={() => handlerEstado('EnviadoCV')}>Enviadas</a>
-                </li>
-                <li class="nav-item">
-                    <a class={`nav-link ${estado === 'DevueltoCV' && 'active'}`} href="#!" onClick={() => handlerEstado('DevueltoCV')}>Devueltos</a>
-                </li>
-            </ul>
+        
 
             <table className="table h-100">
                 <thead>
@@ -93,32 +86,33 @@ export function SolicitudesData() {
                         <th>Tasa de interes anual</th>
                         <th>Precio de venta</th>
                         <th>Observationes</th>
-                        {estado ===  'DevueltoCV' && <th>Enviar</th>}
-                        {estado === 'EnviadoCV'&& <th>Devolver</th>}
-                        { estado === 'Enviado' && <th>Enviar</th>}
-                        { estado === 'Enviado' && <th>Devolver</th>}
+                        <th>Aprobar</th>
+                   <th>Reprobar</th>
+                       
+
                     </tr>
                 </thead>
 
 
                 {userDB && Object.keys(userDB.solicitudes).map((item, index) =>
                     <>
-                        {userDB.solicitudes[item].estado == estado && <tbody>
+                        {userDB.solicitudes[item].estado == 'EnviadoC' && Math.floor(new Date().getTime() - new Date(userDB.solicitudes[item].fecha).getTime())/(1000*60*60*24) < 180 && <tbody>
 
                             <tr>
+                                {/* {    console.log(new Date(userDB.solicitudes[item].fecha))} */}
+
+                                {    console.log(Math.floor(new Date().getTime() - new Date(userDB.solicitudes[item].fecha).getTime())/(1000*60*60*24))}
+
                                 <th scope="row">{index}</th>
                                 <td onClick={() => handlerItemClick(item)}>{userDB.solicitudes[item].Nombres}</td>
                                 <td onClick={() => handlerItemClick(item)}>{userDB.solicitudes[item].Apellidos}</td>
                                 <td onClick={() => handlerItemClick(item)}>{userDB.solicitudes[item].Cedula}</td>
                                 <td>{userDB.solicitudes[item]["Tasa de interes anual"]}</td>
                                 <td>{userDB.solicitudes[item]["Precio de ventas"]}$</td>
-                                <td> <input name={item} onChange={handleOnChange} placeholder="Observaciones" /> </td>
-                                {estado === 'Enviado' && <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item, 'EnviadoCV')}>Enviar/Guardar</button></td>}
-                                {estado === 'Enviado' && <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'DevueltoCV')}>Devolver/Guardar</button></td>}
-
-                                {estado === 'DevueltoCV' && <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item, 'EnviadoCV')}>Enviar/Guardar</button></td>}
-                                {estado === 'EnviadoCV' && <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'DevueltoCV')}>Devolver/Guardar</button></td>}
-
+                               <td> <input name={item} onChange={handleOnChange} placeholder="Observaciones" /> </td>
+                               <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item,  'EnviadoP')}>Enviar/Guardar</button></td>
+                                <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'DevueltoP')}>Devolver/Guardar</button></td>
+                            
                             </tr>
                         </tbody>}
                     </>

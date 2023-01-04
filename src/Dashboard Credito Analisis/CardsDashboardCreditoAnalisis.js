@@ -10,7 +10,7 @@ const cards = [
     id: 1,
     title: "Pendientes",
     image: image1,
-    link: "/Pendientes",
+    link: "/PendientesCA",
     text: "Revisa las solicitudes que aún están pendientes",
     buttontext: "Pendientes"
   },

@@ -15,7 +15,7 @@ export function SolicitudesData() {
     const [feedback, setFeedback] = useState({})
     const [item, setItem] = useState(null)
     const [funcion, setFuncion] = useState(null)
-    const [estado, setEstado] = useState('Enviado')
+    const [estado, setEstado] = useState('EnviadoCV')
 
 
     const navigate = useNavigate();
@@ -73,13 +73,16 @@ export function SolicitudesData() {
 
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class={`nav-link ${estado === 'Enviado' && 'active'}`} href="#!" onClick={() => handlerEstado('Enviado')}>Pencientes</a>
+                    <a class={`nav-link ${estado === 'EnviadoCV' && 'active'}`} href="#!" onClick={() => handlerEstado('EnviadoCV')}>Pendientes</a>
                 </li>
                 <li class="nav-item">
-                    <a class={`nav-link ${estado === 'EnviadoCV' && 'active'}`} href="#!" onClick={() => handlerEstado('EnviadoCV')}>Enviadas</a>
+                    <a class={`nav-link ${estado === 'EnviadoCA' && 'active'}`} href="#!" onClick={() => handlerEstado('EnviadoCA')}>Aprobados</a>
                 </li>
                 <li class="nav-item">
-                    <a class={`nav-link ${estado === 'DevueltoCV' && 'active'}`} href="#!" onClick={() => handlerEstado('DevueltoCV')}>Devueltos</a>
+                    <a class={`nav-link ${estado === 'DevueltoCA' && 'active'}`} href="#!" onClick={() => handlerEstado('DevueltoCA')}>Reprobados</a>
+                </li>
+                <li class="nav-item">
+                    <a class={`nav-link ${estado === 'Rechazados' && 'active'}`} href="#!" onClick={() => handlerEstado('Rechazados')}>Rechazados</a>
                 </li>
             </ul>
 
@@ -93,10 +96,11 @@ export function SolicitudesData() {
                         <th>Tasa de interes anual</th>
                         <th>Precio de venta</th>
                         <th>Observationes</th>
-                        {estado ===  'DevueltoCV' && <th>Enviar</th>}
-                        {estado === 'EnviadoCV'&& <th>Devolver</th>}
-                        { estado === 'Enviado' && <th>Enviar</th>}
-                        { estado === 'Enviado' && <th>Devolver</th>}
+                        {estado === 'DevueltoCA' && <th>Enviar</th>}
+                        {estado === 'EnviadoCA' && <th>Devolver</th>}
+                        {estado === 'EnviadoCV' || estado === 'Rechazados' ? <th>Aprobar</th> : ''}
+                        {estado === 'EnviadoCV' || estado === 'Rechazados' ? <th>Reprobar</th> : ''}
+                        {estado !== 'Rechazados' && <th>Rechazar</th>}
                     </tr>
                 </thead>
 
@@ -113,12 +117,14 @@ export function SolicitudesData() {
                                 <td>{userDB.solicitudes[item]["Tasa de interes anual"]}</td>
                                 <td>{userDB.solicitudes[item]["Precio de ventas"]}$</td>
                                 <td> <input name={item} onChange={handleOnChange} placeholder="Observaciones" /> </td>
-                                {estado === 'Enviado' && <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item, 'EnviadoCV')}>Enviar/Guardar</button></td>}
-                                {estado === 'Enviado' && <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'DevueltoCV')}>Devolver/Guardar</button></td>}
 
-                                {estado === 'DevueltoCV' && <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item, 'EnviadoCV')}>Enviar/Guardar</button></td>}
-                                {estado === 'EnviadoCV' && <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'DevueltoCV')}>Devolver/Guardar</button></td>}
+                                {estado === 'DevueltoCA' && <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item, 'EnviadoCA')}>Aprobar/Guardar</button></td>}
+                                {estado === 'EnviadoCA' && <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'DevueltoCA')}>Reprobar/Guardar</button></td>}
 
+                                {estado === 'EnviadoCV' || estado === 'Rechazados' ? <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item, 'EnviadoCA')}>Aprobar/Guardar</button></td> : ''}
+                                {estado === 'EnviadoCV' || estado === 'Rechazados' ? <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'DevueltoCA')}>Reprobar/Guardar</button></td> : ''}
+
+                                {estado !== 'Rechazados' && <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'Rechazados')}>Rechazar/Guardar</button></td>}
                             </tr>
                         </tbody>}
                     </>

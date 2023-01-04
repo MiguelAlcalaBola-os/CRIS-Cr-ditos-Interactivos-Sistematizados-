@@ -1,7 +1,7 @@
 import React from "react";
-import Card from "./CardDashboardCartas";
-import image1 from "../assets/aprobadas.png";
-import image2 from '../assets/RENOVACIONES.png'
+import Card from "./CardDashboardTramite";
+import image1 from "../assets/pendientes.png";
+import image2 from '../assets/Desembolso.png'
 import image3 from '../assets/COMPLETADAS.png'
 
 
@@ -10,7 +10,7 @@ const cards = [
     id: 1,
     title: "Aprobaciones",
     image: image1,
-    link: "/PendientesC",
+    link: "/Pendientes",
     text: "Revisa las solicitudes que aún están pendientes",
     buttontext: "Pendientes"
   },
@@ -22,14 +22,7 @@ const cards = [
     text: "Descripcion pendiente",
     buttontext: "Renovaciones"
   },
-  {
-    id: 3,
-    title: "Completadas",
-    image: image3,
-    link: "/Rechazadas",
-    text: "Descripcion pendiente",
-    buttontext: "Completadas"
-  },
+
 ];
 
 function Cards() {
@@ -43,6 +36,7 @@ function Cards() {
           </div>
           
         ))}
+        
       </div>
 
     </div>

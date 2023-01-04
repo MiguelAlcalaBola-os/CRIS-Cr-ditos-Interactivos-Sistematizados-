@@ -20,11 +20,11 @@ const Dashboard = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol !== 'creditoAnalisis'){ navigate('/') }
+    if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol !== 'pipeline'){ navigate('/') }
 }, [userDB]);
   return (
     <>
-    {userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'creditoAnalisis' && <div className="home">
+    {userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'pipeline' && <div className="home">
       <Sidebar />
       <div className="homeContainer">
         <Navbar />
@@ -36,11 +36,15 @@ const Dashboard = () => {
         <div className="widgets">
           <CardsDashboardOficial />
         </div>
-        <div className="charts"></div>
+        <div className="charts">
+       
+        </div>
         <div className="listContainer">
           <div className="listTitle">Ultimas efectuaciones</div>
         </div>
-       
+        <Link to="/DashboardTramite" style={{ textDecoration: "none" }}>
+      <button>Dashboard Tramite</button>
+      </Link>
       </div>
     </div>}
     </>
