@@ -26,6 +26,10 @@ const Dashboard = () => {
     if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'creditoAnalisis'){ navigate('/DashCreditoAnalisis') }
     if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'cartas'){ navigate('/DashCartas') }
     if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'pipeline'){ navigate('/DashboardPipeline') }
+
+    if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'tramite'){ navigate('/DashboardTramite') }
+    if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'desembolso'){ navigate('/DashboardDesembolso') }
+    if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'validacion'){ navigate('/DashboardValidacion') }
 }, [userDB]);
 
 

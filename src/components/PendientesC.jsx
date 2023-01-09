@@ -75,12 +75,14 @@ export function SolicitudesData() {
 
 <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class={`nav-link ${estado === 'EnviadoCA' && 'active'}`} href="#!" onClick={() => handlerEstado('EnviadoCA')}>Pencientes</a>
+                    <a class={`nav-link ${estado === 'EnviadoCA' && 'active'}`} href="#!" onClick={() => handlerEstado('EnviadoCA')}>Pendientes</a>
                 </li>
                 <li class="nav-item">
                     <a class={`nav-link ${estado === 'EnviadoC' && 'active'}`} href="#!" onClick={() => handlerEstado('EnviadoC')}>Enviadas</a>
                 </li>
-         
+                <li class="nav-item">
+                    <a class={`nav-link ${estado === 'DevueltoP' && 'active'}`} href="#!" onClick={() => handlerEstado('DevueltoP')}>Rechazados</a>
+                </li>
             </ul>
 
             <table className="table h-100">

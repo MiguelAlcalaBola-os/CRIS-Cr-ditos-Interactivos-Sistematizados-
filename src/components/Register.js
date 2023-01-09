@@ -68,6 +68,9 @@ export function Register() {
             <option value="creditoAnalisis">Creditos Analasis</option>
             <option value="cartas">Cartas</option>
             <option value="pipeline">Pipeline</option>
+            <option value="tramite">Tramite</option>
+            <option value="validacion">Validacion</option>
+            <option value="desembolso">Desembolso</option>
           </select>
           </div> <br />
           <div className="d-flex justify-content-center">

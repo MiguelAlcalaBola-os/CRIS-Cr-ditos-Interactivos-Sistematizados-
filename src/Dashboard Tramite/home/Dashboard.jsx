@@ -20,11 +20,11 @@ const Dashboard = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol !== 'creditoAnalisis'){ navigate('/') }
+    if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol !== 'tramite'){ navigate('/') }
 }, [userDB]);
   return (
     <>
-    {userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'creditoAnalisis' && <div className="home">
+    {userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'tramite' && <div className="home">
       <Sidebar />
       <div className="homeContainer">
         <Navbar />

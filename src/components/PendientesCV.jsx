@@ -81,6 +81,9 @@ export function SolicitudesData() {
                 <li class="nav-item">
                     <a class={`nav-link ${estado === 'DevueltoCV' && 'active'}`} href="#!" onClick={() => handlerEstado('DevueltoCV')}>Devueltos</a>
                 </li>
+                <li class="nav-item">
+                    <a class={`nav-link ${estado === 'Rechazados' && 'active'}`} href="#!" onClick={() => handlerEstado('Rechazados')}>Rechazados</a>
+                </li>
             </ul>
 
             <table className="table h-100">
@@ -97,6 +100,8 @@ export function SolicitudesData() {
                         {estado === 'EnviadoCV'&& <th>Devolver</th>}
                         { estado === 'Enviado' && <th>Enviar</th>}
                         { estado === 'Enviado' && <th>Devolver</th>}
+                        { estado === 'Rechazados' && <th>Enviar</th>}
+                        { estado === 'Rechazados' && <th>Devolver</th>}
                     </tr>
                 </thead>
 
@@ -118,6 +123,9 @@ export function SolicitudesData() {
 
                                 {estado === 'DevueltoCV' && <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item, 'EnviadoCV')}>Enviar/Guardar</button></td>}
                                 {estado === 'EnviadoCV' && <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'DevueltoCV')}>Devolver/Guardar</button></td>}
+ 
+                                {estado === 'Rechazados' && <td><button type="button" class="btn btn-success" onClick={() => handlerModal(item, 'EnviadoCV')}>Enviar/Guardar</button></td>}
+                                {estado === 'Rechazados' && <td><button type="button" class="btn btn-danger" onClick={() => handlerModal(item, 'DevueltoCV')}>Devolver/Guardar</button></td>}
 
                             </tr>
                         </tbody>}

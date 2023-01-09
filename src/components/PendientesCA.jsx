@@ -23,8 +23,9 @@ export function SolicitudesData() {
 
 
     const handlerSolicitud = (item, data) => {
+        
         const observations = feedback[item] ? { observaciones: feedback[item] } : null;
-        const object = { estado: data, ...observations }
+        const object = { estado: data, ...observations, fechaDeEmision: new Date() }
         const url = `solicitudes/${item}`
         const complemento = ''
         writeUserData(url, complemento, object)

@@ -9,7 +9,7 @@ const cards = [
     id: 1,
     title: "Aprobaciones",
     image: image1,
-    link: "/Pendientes",
+    link: "/PendientesD",
     text: "Revisa las solicitudes que aún están pendientes",
     buttontext: "Pendientes"
   },

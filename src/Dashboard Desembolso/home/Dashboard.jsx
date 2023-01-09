@@ -1,12 +1,12 @@
-import Sidebar from "../sidebar Dashboard Validacion/Sidebar"
-import Navbar from "../navbar Dashboard Validacion/Navbar"
+import Sidebar from "../sidebar Dashboard Desembolso/Sidebar"
+import Navbar from "../navbar Dashboard Desembolso/Navbar"
 import "./home.scss";
 import { Link, useNavigate  } from "react-router-dom";
 import { useAuth } from '../../context/AuthContext.js'
 
 import { useState, useEffect } from "react";
 
-import CardsDashboardOficial from "../CardsDashboardValidacion";
+import CardsDashboardOficial from "../CardsDashboardDesembolso";
 const Dashboard = () => {
 
   
@@ -16,11 +16,11 @@ const Dashboard = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol !== 'creditoAnalisis'){ navigate('/') }
+    if (userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol !== 'desembolso'){ navigate('/') }
 }, [userDB]);
   return (
     <>
-    {userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'creditoAnalisis' && <div className="home">
+    {userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol && userDB.users[user.uid].rol === 'desembolso' && <div className="home">
       <Sidebar />
       <div className="homeContainer">
         <Navbar />

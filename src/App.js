@@ -28,6 +28,11 @@ import EntregasInmediatas from "./components/EntregasInmediatas";
 import EntregasFuturas from "./components/EntregasFuturas";
 import Verificadas from "./components/Verificadas";
 
+import PendientesV from "./components/PendientesV";
+import PendientesD from "./components/PendientesD";
+import PendientesT from "./components/PendientesT";
+
+
 import Aprobadas from "./components/Aprobadas";
 import Rechazadas from "./components/Rechazadas";
 import DashCreditoVerificacion from "../src/Dashboard Credito Verificacion/home/Dashboard"
@@ -36,6 +41,8 @@ import DashOficial from "../src/Dashboard Oficial/home/Dashboard"
 import DashCreditoAnalisis from "../src/Dashboard Credito Analisis/home/Dashboard"
 import DashTramite from "../src/Dashboard Tramite/home/Dashboard"
 import DashValidacion from "../src/Dashboard Validacion/home/Dashboard"
+import DashDesembolso from "../src/Dashboard Desembolso/home/Dashboard"
+
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const { user } = useAuth();
@@ -54,8 +61,7 @@ function App() {
             }
           />
           {/* NUEVAS RUTAS */}
-  <Route path="/DashboardTramite" element={<DashTramite />} />
-  <Route path="/DashboardValidacion" element={<DashValidacion />} />
+
 
           <Route
             path="/dashboardoficial"
@@ -93,13 +99,42 @@ function App() {
               </PrivateRoute>
             }
           />
+          {/* 
+          <Route path="/DashboardTramite" element={<DashTramite />} />
+          <Route path="/DashboardValidacion" element={<DashValidacion />} /> */}
 
+          <Route
+            path="/DashboardTramite"
+            element={
+              <PrivateRoute isAllowed={user}>
+                <DashTramite />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/DashboardValidacion"
+            element={
+              <PrivateRoute isAllowed={user}>
+                <DashValidacion />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/DashboardDesembolso"
+            element={
+              <PrivateRoute isAllowed={user}>
+                <DashDesembolso />
+              </PrivateRoute>
+            }
+          />
 
           {/* <Route path="/DashCreditoVerificacion" element={<DashCreditoVerificacion />}></Route> */}
           <Route path="Login" element={<Login />} />
           <Route path="Register" element={<Register />} />
-        
-{/* 
+
+          {/* 
           <Route path="/DashboardPipeline" element={<DashboardPipeline />} />
           <Route path="/DashCartas" element={<DashboardCartas />} /> */}
 
@@ -180,7 +215,7 @@ function App() {
               </PrivateRoute>
             }
           />
-           <Route
+          <Route
             path="EntregasInmediatas"
             element={
               <PrivateRoute isAllowed={user}>
@@ -188,7 +223,7 @@ function App() {
               </PrivateRoute>
             }
           />
-              <Route
+          <Route
             path="EntregasFuturas"
             element={
               <PrivateRoute isAllowed={user}>
@@ -212,6 +247,37 @@ function App() {
               </PrivateRoute>
             }
           />
+ <Route
+            path="PendientesV"
+            element={
+              <PrivateRoute isAllowed={user}>
+                <PendientesV />
+              </PrivateRoute>
+            }
+          />
+           <Route
+            path="PendientesT"
+            element={
+              <PrivateRoute isAllowed={user}>
+                <PendientesT />
+              </PrivateRoute>
+            }
+          />
+           <Route
+            path="PendientesD"
+            element={
+              <PrivateRoute isAllowed={user}>
+                <PendientesD />
+              </PrivateRoute>
+            }
+          />
+
+
+
+
+
+
+
           **<Route
             path="SolicitudesData/:item"
             element={
