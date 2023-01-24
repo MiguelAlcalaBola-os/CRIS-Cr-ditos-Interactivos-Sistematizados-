@@ -1,7 +1,7 @@
 import Dashboard from "./pages/home/Dashboard";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Details from "./components/Details";
+import Details from "./components/details";
 import DashboardCartas from "../src/Dashboard Cartas/home/Dashboard"
 import DashboardPipeline from "./Dashboard Pipeline/home/Dashboard"
 import List from "./pages/list/List";
@@ -43,9 +43,13 @@ import DashTramite from "../src/Dashboard Tramite/home/Dashboard"
 import DashValidacion from "../src/Dashboard Validacion/home/Dashboard"
 import DashDesembolso from "../src/Dashboard Desembolso/home/Dashboard"
 
+
+import Notificaciones from "./components/navbar/Notificaciones";
+
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const { user } = useAuth();
+  
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
@@ -71,6 +75,8 @@ function App() {
               </PrivateRoute>
             }
           />
+
+          <Route path="/notificaciones" element={<Notificaciones/>} />
 
           <Route
             path="/DashCreditoAnalisis"
@@ -142,6 +148,7 @@ function App() {
 
           <Route element={<PrivateRoute isAllowed={user} redirectTo="/Login" />}>
             <Route index element={<Dashboard />} />
+            
           </Route>
           <Route
             path="DashCreditoVerificacion"
@@ -151,6 +158,7 @@ function App() {
               </PrivateRoute>
             }
           />
+          
           <Route element={<PrivateRoute isAllowed={user} redirectTo="/Solicitud" />}>
             <Route path="/Solicitud" element={<Solicitud />} />
           </Route>

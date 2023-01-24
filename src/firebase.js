@@ -63,6 +63,7 @@ const signup = (email, password, navigate, setSuccess, rol) => {
 const login = (email, password, navigate, setSuccess) => {
   signInWithEmailAndPassword(auth, email, password)
 .then((result) => {
+  console.log(result)
   navigate("/")
 })
 .catch((error) => {

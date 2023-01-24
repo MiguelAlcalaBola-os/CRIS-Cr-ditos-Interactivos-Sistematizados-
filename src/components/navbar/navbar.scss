@@ -69,3 +69,23 @@
     }
   }
 }
+.submenu {
+  position: relative;
+}
+
+.submenu #carrito{
+  display: none;
+}
+.submenu:hover #carrito{
+  display: block;
+  position: absolute;
+  right:0;
+  background-color: rgb(238, 231, 231);
+  border: 0.1rem solid rgb(143, 141, 141);
+  border-radius: 0.5rem;
+  top:100%;
+  z-index: 1;
+  padding: 20px;
+  min-height: 200px;
+  min-width: 300px;
+}

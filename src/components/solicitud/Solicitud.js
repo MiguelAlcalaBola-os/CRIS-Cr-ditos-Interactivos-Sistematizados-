@@ -15,7 +15,7 @@ import Solicitudimg3 from "../../assets/solicitudimg3.png";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 export function Cotizar() {
-  const { userDB, setUserSuccess, success, postsIMG, setUserPostsIMG } =
+  const { userDB, user, setUserSuccess, success, postsIMG, setUserPostsIMG } =
     useAuth();
   const [selectedDate, setselectedDate] = useState(null);
   const [solicitudenviada, setSolicitudEnviada] = useState(false);
@@ -121,7 +121,7 @@ export function Cotizar() {
         solicitudData["Nombre Completo REF2"] &&
         solicitudData["Nombre Completo REF3"] &&
         check === true) {
-        writeUserData("/solicitudes/", solicitudData.Cedula, solicitudData);
+        writeUserData("/solicitudes/", solicitudData.Cedula, {...solicitudData, userId: user.uid});
       }
 
     }

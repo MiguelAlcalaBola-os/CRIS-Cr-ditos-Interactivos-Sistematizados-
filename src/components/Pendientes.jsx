@@ -10,7 +10,7 @@ import Success from './Success'
 import { getList } from "../storageFB";
 
 export function SolicitudesData() {
-    const { userDB, setUserData, postsIMG, setUserPostsIMG, setUserSuccess, success, } = useAuth()
+    const { userDB, user, setUserData, postsIMG, setUserPostsIMG, setUserSuccess, success, rolAdministrador } = useAuth()
     const [modal, setModal] = useState(false);
     const [feedback, setFeedback] = useState({})
     const [item, setItem] = useState(null)
@@ -26,6 +26,8 @@ export function SolicitudesData() {
         const object = { estado: data, ...feedback }
         const url = `solicitudes/${item}`
         const complemento = ''
+        console.log({object, url, complemento})
+        console.log(item)
         writeUserData(url, complemento, object)
         setUserSuccess('EnviadoCV')
         setModal(false)
@@ -43,7 +45,7 @@ export function SolicitudesData() {
     const handleOnChange = (e) => {
         const name = e.target.name
         const value = e.target.value
-        setFeedback({ ...feedback, [name]: value })
+        setFeedback({ ...feedback, [name]: value, oficial: user.email, rol: rolAdministrador })
     }
 
     const handlerItemClick = (item) => {
@@ -67,6 +69,9 @@ export function SolicitudesData() {
     useEffect(() => {
         postsIMG === true && getList(postsIMG, setUserPostsIMG)
     }, [postsIMG]);
+
+
+
     return (
         <>
 

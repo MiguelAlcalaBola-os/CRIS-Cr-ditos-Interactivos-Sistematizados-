@@ -20,6 +20,7 @@ export function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(setUserSuccess)
     login(userLogin.email, userLogin.password, navigate, setUserSuccess);
   };
 
