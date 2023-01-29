@@ -44,7 +44,11 @@ import DashValidacion from "../src/Dashboard Validacion/home/Dashboard"
 import DashDesembolso from "../src/Dashboard Desembolso/home/Dashboard"
 
 
-import Notificaciones from "./components/navbar/Notificaciones";
+import Mensajes from "./components/areaMensajes/Mensajes";
+import EnviarMensaje from "./components/areaMensajes/EnviarMensaje";
+import Entrantes from "./components/areaMensajes/Entrantes";
+import Salientes from "./components/areaMensajes/Salientes";
+import VerMensaje from "./components/areaMensajes/VerMensaje";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -65,6 +69,18 @@ function App() {
             }
           />
           {/* NUEVAS RUTAS */}
+          
+          <Route path="/mensajes" 
+            element={
+            <PrivateRoute isAllowed={user}>
+              <Mensajes/>
+            </PrivateRoute>
+            }>
+            <Route index element={<EnviarMensaje/>} />
+            <Route path="entrantes" element={<Entrantes/>} />
+            <Route path="salientes" element={<Salientes/>} />
+            <Route path="mensaje/:id" element={<VerMensaje/>} />
+          </Route>
 
 
           <Route
@@ -76,7 +92,7 @@ function App() {
             }
           />
 
-          <Route path="/notificaciones" element={<Notificaciones/>} />
+          
 
           <Route
             path="/DashCreditoAnalisis"
@@ -255,7 +271,7 @@ function App() {
               </PrivateRoute>
             }
           />
- <Route
+          <Route
             path="PendientesV"
             element={
               <PrivateRoute isAllowed={user}>

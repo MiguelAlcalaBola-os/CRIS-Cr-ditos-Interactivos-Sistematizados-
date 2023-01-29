@@ -10,7 +10,7 @@ import Success from './Success'
 import { getList } from "../storageFB";
 
 export function SolicitudesData() {
-    const { userDB, setUserData, postsIMG, setUserPostsIMG, setUserSuccess, success, } = useAuth()
+    const { userDB, setUserData, postsIMG, setUserPostsIMG, setUserSuccess, success, user, rolAdministrador } = useAuth()
     const [modal, setModal] = useState(false);
     const [feedback, setFeedback] = useState({})
     const [item, setItem] = useState(null)
@@ -23,7 +23,8 @@ export function SolicitudesData() {
 
 
     const handlerSolicitud = (item, data) => {
-        const object = { estado: data, ...feedback }
+        const observations = feedback[item] ? { observaciones: feedback[item] } : null;
+        const object = { estado: data, oficial: user.email, rol: rolAdministrador, ...observations }
         const url = `solicitudes/${item}`
         const complemento = ''
         writeUserData(url, complemento, object)

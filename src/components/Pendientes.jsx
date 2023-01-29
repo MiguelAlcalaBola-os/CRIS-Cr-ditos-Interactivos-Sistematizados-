@@ -23,7 +23,8 @@ export function SolicitudesData() {
 
 
     const handlerSolicitud = (item, data) => {
-        const object = { estado: data, ...feedback }
+        const object = { estado: data, oficial: user.email, rol: rolAdministrador, ...feedback }
+        console.log(object)
         const url = `solicitudes/${item}`
         const complemento = ''
         console.log({object, url, complemento})
@@ -45,7 +46,7 @@ export function SolicitudesData() {
     const handleOnChange = (e) => {
         const name = e.target.name
         const value = e.target.value
-        setFeedback({ ...feedback, [name]: value, oficial: user.email, rol: rolAdministrador })
+        setFeedback({ ...feedback, [name]: value })
     }
 
     const handlerItemClick = (item) => {

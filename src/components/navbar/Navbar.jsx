@@ -10,13 +10,14 @@ import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext, useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext.js";
-
+import { useNavigate} from 'react-router-dom';
 
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
 
-  const { contadorNotificaciones } = useAuth();
+  const { contadorNotificaciones, contadorMensajes } = useAuth();
 
+  const navigate = useNavigate();
 
   return (
     <div className="navbar  h-auto">
@@ -48,8 +49,10 @@ const Navbar = () => {
           
 
           <div className="item">
-            <ChatBubbleOutlineOutlinedIcon className="icon" />
-            <div className="counter">2</div>
+            <ChatBubbleOutlineOutlinedIcon className="icon" 
+            onClick={ e => navigate('/mensajes') }
+            />
+            <div className="counter">{contadorMensajes}</div>
           </div>
           <div className="item">
             <ListOutlinedIcon className="icon" />
